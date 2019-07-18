@@ -58,7 +58,7 @@
                 <input type="text" class="form-control" name="lpg_price">
             </div>
 
-            <button type="submit" class="btn btn-primary" >Submit</button>
+            <button type="submit" class="btn btn-primary" >Add</button>
 
         </form>
     </div>
