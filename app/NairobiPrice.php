@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class NairobiPrice extends Model
 {
-    //
     protected $fillable = [
         'marketer_name',
         'diesel_price',

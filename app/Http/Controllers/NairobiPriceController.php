@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\NairobiPrice;
+use Illuminate\Http\Request;
 
 class NairobiPriceController extends Controller
 {
@@ -14,7 +14,6 @@ class NairobiPriceController extends Controller
      */
     public function index()
     {
-        //
         $nairobiprices = NairobiPrice::all();
 
         return view('nairobiprices.index', compact('nairobiprices'));
@@ -27,7 +26,6 @@ class NairobiPriceController extends Controller
      */
     public function create()
     {
-        //
         return view('nairobiprices.create');
     }
 
@@ -39,8 +37,6 @@ class NairobiPriceController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        
         $request->validate([
             'marketer_name' => 'required',
             'diesel_price' => 'nullable|between:0, 9999.99',
@@ -48,7 +44,7 @@ class NairobiPriceController extends Controller
             'kerosene_price' => 'nullable|between:0, 9999.99',
             'ido_price' => 'nullable|between:0, 9999.99',
             'fo_price' => 'nullable|between:0, 9999.99',
-            'lpg_price' => 'nullable|between:0, 9999.99'
+            'lpg_price' => 'nullable|between:0, 9999.99',
         ]);
         $nairobiprice = new NairobiPrice([
             'marketer_name' => $request->get('marketer_name'),
@@ -57,7 +53,7 @@ class NairobiPriceController extends Controller
             'kerosene_price' => $request->get('kerosene_price'),
             'ido_price' => $request->get('ido_price'),
             'fo_price' => $request->get('fo_price'),
-            'lpg_price' => $request->get('lpg_price')
+            'lpg_price' => $request->get('lpg_price'),
         ]);
         $nairobiprice->save();
 
@@ -72,7 +68,6 @@ class NairobiPriceController extends Controller
      */
     public function show($id)
     {
-        //
     }
 
     /**
@@ -83,10 +78,9 @@ class NairobiPriceController extends Controller
      */
     public function edit($id)
     {
-        //
-        $nairobiprices = NairobiPrice::all();
+        $nairobiprice = NairobiPrice::find($id);
 
-        return view('nairobiprices.index', compact('nairobiprices'));
+        return view('nairobiprices.edit', compact('nairobiprice'));
     }
 
     /**
@@ -98,7 +92,6 @@ class NairobiPriceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
         $request->validate([
             'marketer_name' => 'required',
             'diesel_price' => 'nullable|between:0, 9999.99',
@@ -106,7 +99,7 @@ class NairobiPriceController extends Controller
             'kerosene_price' => 'nullable|between:0, 9999.99',
             'ido_price' => 'nullable|between:0, 9999.99',
             'fo_price' => 'nullable|between:0, 9999.99',
-            'lpg_price' => 'nullable|between:0, 9999.99'
+            'lpg_price' => 'nullable|between:0, 9999.99',
         ]);
         $nairobiprice = new NairobiPrice([
             'marketer_name' => $request->get('marketer_name'),
@@ -115,7 +108,7 @@ class NairobiPriceController extends Controller
             'kerosene_price' => $request->get('kerosene_price'),
             'ido_price' => $request->get('ido_price'),
             'fo_price' => $request->get('fo_price'),
-            'lpg_price' => $request->get('lpg_price')
+            'lpg_price' => $request->get('lpg_price'),
         ]);
         $nairobiprice->save();
 
@@ -130,6 +123,9 @@ class NairobiPriceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $nairobiprice = NairobiPrice::find($id);
+        $nairobiprice->delete();
+
+        return redirect('/nairobiprices')->with('success', 'Price has been deleted Successfully');
     }
 }
