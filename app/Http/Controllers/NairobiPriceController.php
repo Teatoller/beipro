@@ -15,6 +15,9 @@ class NairobiPriceController extends Controller
     public function index()
     {
         //
+        $nairobiprices = NairobiPrice::all();
+
+        return view('nairobiprices.index', compact('nairobiprices'));
     }
 
     /**
@@ -81,6 +84,9 @@ class NairobiPriceController extends Controller
     public function edit($id)
     {
         //
+        $nairobiprices = NairobiPrice::all();
+
+        return view('nairobiprices.index', compact('nairobiprices'));
     }
 
     /**
