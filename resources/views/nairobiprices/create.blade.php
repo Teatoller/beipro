@@ -1,5 +1,10 @@
 @extends('layout')
 @section('content')
+<style>
+    .uper {
+        margin-top: 40px;
+    }
+</style>
 
 <div class="card uper">
     <div class="card-header">
@@ -16,7 +21,7 @@
             </ul>
         </div><br />
         @endif
-        <form method="post" action="{{route(nairobiprices.store)}}">
+        <form method="post" action="{{ route('nairobiprices.store') }}">
             <div class="form-group">
                 @csrf
                 <label for="name">Marketer Name</label>
@@ -39,17 +44,17 @@
             </div>
 
             <div class="form-group">
-                <label for="price">IDO</label>
+                <label for="price">Industrial Diesel Oil</label>
                 <input type="text" class="form-control" name="ido_price">
             </div>
 
             <div class="form-group">
-                <label for="price">FO</label>
+                <label for="price">Fuel Oil</label>
                 <input type="text" class="form-control" name="fo_price">
             </div>
 
             <div class="form-group">
-                <label for="price">LPG</label>
+                <label for="price">Liquified Petroleum Gas</label>
                 <input type="text" class="form-control" name="lpg_price">
             </div>
 
