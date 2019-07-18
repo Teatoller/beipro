@@ -99,6 +99,27 @@ class NairobiPriceController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $request->validate([
+            'marketer_name' => 'required',
+            'diesel_price' => 'nullable|between:0, 9999.99',
+            'petrol_price' => 'nullable|between:0, 9999.99',
+            'kerosene_price' => 'nullable|between:0, 9999.99',
+            'ido_price' => 'nullable|between:0, 9999.99',
+            'fo_price' => 'nullable|between:0, 9999.99',
+            'lpg_price' => 'nullable|between:0, 9999.99'
+        ]);
+        $nairobiprice = new NairobiPrice([
+            'marketer_name' => $request->get('marketer_name'),
+            'diesel_price' => $request->get('diesel_price'),
+            'petrol_price' => $request->get('petrol_price'),
+            'kerosene_price' => $request->get('kerosene_price'),
+            'ido_price' => $request->get('ido_price'),
+            'fo_price' => $request->get('fo_price'),
+            'lpg_price' => $request->get('lpg_price')
+        ]);
+        $nairobiprice->save();
+
+        return redirect('/nairobiprices')->with('success', 'Price has been updated');
     }
 
     /**

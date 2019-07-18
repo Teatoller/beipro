@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section
+@section('content')
 <style>
     .uper {
         margin-top: 40px;
@@ -16,7 +16,7 @@
         <thead>
             <tr>
                 <td>ID</td>
-                <td>Marketer Name</td>
+                <td>Marketer</td>
                 <td>Diesel Price</td>
                 <td>Petrol Price</td>
                 <td>Kerosene Price</td>
@@ -33,7 +33,7 @@
                 <td>{{$nairobiprice->marketer_name}}</td>
                 <td>{{$nairobiprice->diesel_price}}</td>
                 <td>{{$nairobiprice->petrol_price}}</td>
-                <td>{{$nairobiprice->kerosene_Price}}</td>
+                <td>{{$nairobiprice->kerosene_price}}</td>
                 <td>{{$nairobiprice->ido_price}}</td>
                 <td>{{$nairobiprice->fo_price}}</td>
                 <td>{{$nairobiprice->lpg_price}}</td>
@@ -46,7 +46,7 @@
                 <td>
                     <form action="{{route('nairobiprices.destroy', $nairobiprice->id)}}"  method="post">
                         @csrf
-                        @method=('DELETE')
+                        @method('DELETE')
                         <button class="btn btn-danger" type="submit">Delete</button>
                     </form>
                 </td>
