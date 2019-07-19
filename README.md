@@ -21,12 +21,12 @@ v. Open your choice editor  (for vscode run ```code .``` on terminal)
 
 2; Make sure you have the latest .env file as per the `example .env`
 
-> DB_CONNECTION=pgsql
-> DB_HOST=127.0.0.1
-> DB_PORT=5432
-> DB_DATABASE=beipro
-> DB_USERNAME=postgres
-> DB_PASSWORD=
+- DB_CONNECTION=pgsql
+- DB_HOST=127.0.0.1
+- DB_PORT=5432
+- DB_DATABASE=beipro
+- DB_USERNAME=postgres
+- DB_PASSWORD=
 
 3; Install dependencies
 
@@ -38,5 +38,14 @@ refer to [Link](https://medium.com/@Umesh_Kafle/postgresql-and-postgis-installat
 i. On terminal run ```php artisan serve```
 
 *NB* The backend server will run on port `http://127.0.0.1:8000` and open on the browser. If it does not open it manually.
+
+Endpoints
+
+| #  | purpose                         | endpoint              |
+|----|---------------------------------|-----------------------|
+| 1. | to login/register               | /login                |
+| 2. | to add new markerter and prices | /nairobiprices/create |
+| 3. | to view prevailing prices       | /nairobiprices        |
+|    |                                 |                       |
 
 - stop application ```control + c```
