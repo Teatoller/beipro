@@ -27,7 +27,7 @@
             <div class="form-group">
                 
                 <label for="name">Marketer Name</label>
-                <input type="text" class="form-control" name="marketer_name" value="{{ $nairobiprice->market_name}}">
+                <input type="text" class="form-control" name="marketer_name" value="{{ $nairobiprice->marketer_name}}">
             </div>
 
             <div class="form-group">
