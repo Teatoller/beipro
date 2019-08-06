@@ -61,6 +61,8 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ],
+        "test": "vendor/bin/phpunit --debug --verbose --coverage-clover build/logs/clover.xml",
+        "test:filter": "vendor/bin/phpunit --filter",
         "lint": [
             "vendor/bin/parallel-lint --colors",
             "vendor/bin/ecs check app",

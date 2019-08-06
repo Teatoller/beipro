@@ -1,0 +1,57 @@
+version: '3'
+services:
+  app:
+    image: beipro-main-backend
+    container_name: beipro-app
+    build:
+      context: ../../
+      dockerfile: docker/dev/Dockerfile
+    links:
+      - maindb
+      - redis
+    working_dir: /var/www
+    volumes:
+      - ../..:/var/www
+      - /var/www/vendor/
+
+    ports:
+      - '8000:8000'
+    environment:
+      - "DB_PORT=5432"
+      - "DB_HOST=maindb"
+      - "DB_CONNECTION=pgsql"
+      - "DB_DATABASE=beipro"
+      - "DB_DATABASE_TEST=beipro_test"
+      - "DB_USERNAME=postgres"
+      - "DB_PASSWORD=postgres"
+      - "REDIS_PORT=6379"
+      - "REDIS_HOST=redis"
+    depends_on:
+      - maindb
+      - redis
+
+  maindb:
+    image: postgres:11
+    container_name: beipro-main-db
+    volumes:
+      - dbmain:/var/lib/postgresql/data
+      - ../docker-postgresql-multiple-databases:/docker-entrypoint-initdb.d
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_MULTIPLE_DATABASES: beipro,beipro_test
+    expose:
+      - '5432'
+    ports:
+      - '5433:5432'
+
+  redis:
+    image: redis:4.0
+    container_name: beipro-redis
+    expose:
+      - '6379'
+    ports:
+      - "6382:6379"
+
+volumes:
+  dbmain:
