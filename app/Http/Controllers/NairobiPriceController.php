@@ -99,7 +99,7 @@ class NairobiPriceController extends Controller
             'kerosene_price' => 'nullable|between:0, 9999.99',
             'ido_price' => 'nullable|between:0, 9999.99',
             'fo_price' => 'nullable|between:0, 9999.99',
-            'lpg_price' => 'nullable|between:0, 9999.99'
+            'lpg_price' => 'nullable|between:0, 9999.99',
         ]);
         $nairobiprice = NairobiPrice::find($id);
         $nairobiprice->marketer_name = $request->get('marketer_name');
