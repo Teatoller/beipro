@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,12 +12,8 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::prefix('v1')->group(function() {
-    Route::get('test', function() {
-        return response(['message' => 'BeiPro API works well!'], 200);
-    });
+Route::get('test', function () {
+    return response(['message' => 'BeiPro API works well!'], 200);
 });
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::resource('user', 'Auth\UserController');

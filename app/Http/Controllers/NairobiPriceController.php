@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\NairobiPrice;
+use App\Models\NairobiPrice;
 use Illuminate\Http\Request;
 
 class NairobiPriceController extends Controller
