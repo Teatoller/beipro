@@ -16,4 +16,16 @@ Route::get('test', function () {
     return response(['message' => 'BeiPro API works well!'], 200);
 });
 
+Route::prefix('auth')->group(function () {
+    Route::post('login', 'Auth\AuthController@login');
+    Route::get('refresh', 'Auth\AuthController@refreshToken');
+
+    Route::middleware('auth:api')->group(function () {
+        Route::get('logout', 'Auth\AuthController@logout');
+        Route::get('test', function () {
+            return response(['message' => 'BeiPro authentication service works well!'], 200);
+        });
+    });
+});
+
 Route::resource('user', 'Auth\UserController');

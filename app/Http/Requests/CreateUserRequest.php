@@ -6,7 +6,6 @@ use App\Helpers\RegexHelper;
 use App\Helpers\ResponseMessages;
 use Illuminate\Foundation\Http\FormRequest;
 
-
 class CreateUserRequest extends FormRequest
 {
     /**
@@ -19,8 +18,8 @@ class CreateUserRequest extends FormRequest
         return [
             'firstname' => ['required', 'string', 'max:255'],
             'lastname' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'regex:' .  RegexHelper::EMAIL_REGEX , 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'regex:' . RegexHelper::PASSWORD_REGEX ],
+            'email' => ['required', 'string', 'regex:' . RegexHelper::EMAIL_REGEX, 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'regex:' . RegexHelper::PASSWORD_REGEX],
         ];
     }
 
@@ -28,7 +27,7 @@ class CreateUserRequest extends FormRequest
     {
         return [
             'password.regex' => ResponseMessages::getResponseMessage(422, ['field' => 'password']),
-            'email.regex' => ResponseMessages::getResponseMessage(422, ['field' => 'email'])
+            'email.regex' => ResponseMessages::getResponseMessage(422, ['field' => 'email']),
         ];
     }
 }

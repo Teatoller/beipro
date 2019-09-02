@@ -4,20 +4,9 @@ namespace Tests;
 
 class UserTestCase extends TestCase
 {
-    use CreatesApplication;
-
-    protected function withoutAuthentication()
+    protected function setUp(): void
     {
-        $this->app['auth']->guard('andelan')->unsetUser();
-
-        return $this;
-    }
-
-    /**
-     * Login a default user
-     */
-    protected function withDefaultAuthentication()
-    {
-        return $this->actingAs();
+        parent::setUp();
+        $this->withDefaultAuthentication();
     }
 }
