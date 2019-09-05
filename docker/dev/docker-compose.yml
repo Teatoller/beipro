@@ -20,8 +20,6 @@ services:
       - "DB_PORT=5432"
       - "DB_HOST=maindb"
       - "DB_CONNECTION=pgsql"
-      - "DB_DATABASE=beipro"
-      - "DB_DATABASE_TEST=beipro_test"
       - "DB_USERNAME=postgres"
       - "DB_PASSWORD=postgres"
       - "REDIS_PORT=6379"

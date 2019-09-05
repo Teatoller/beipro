@@ -26,7 +26,7 @@ help:
 	{ lastLine = $$0 }' $(MAKEFILE_LIST)
 	@echo ''
 
-## Builds the docker imagge of the application
+## Builds the docker image of the application
 app-build:
 	@ ${INFO} "Building required docker images"
 	@ bash ${DOCKER_SETUP}
