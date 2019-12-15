@@ -29,3 +29,7 @@ Route::prefix('auth')->group(function () {
 });
 
 Route::resource('user', 'Auth\UserController');
+
+Route::apiResources([
+    'currentprices' => 'CurrentPriceController',
+]);

@@ -17,10 +17,12 @@ To check php version on your terminal run ```php -version```
 ### Getting Started
 
 1. Setting Repo.
-i. ```mkdir project```
-ii. ```cd project```
-iii. ```git clone https://github.com/Teatoller/beipro.git```
-iv.```cd beipro```
+
+- ```mkdir project```
+- ```cd project```
+- ```git clone https://github.com/Teatoller/beipro.git```
+-```cd beipro```
+
 v. Open your choice editor  (for vscode run ```code .``` on terminal)
 
 2. Make sure you have the latest .env file as per the `example .env`
@@ -39,8 +41,8 @@ b. On terminal run  ```createdb beipro``` to create a postgreSQL db.
 
 ### Start Beipro with Docker [Preffered mode]
 
-i. run `make app-build`
-ii. run `make app-start`
+- run `make app-build`
+- run `make app-start`
 
 ### Start Beipro with `php artisan serve`
 
@@ -56,11 +58,13 @@ i. On terminal run ```php artisan serve```
 
 #### Endpoints
 
+Test with Postman or equivalent
+
 | #  | purpose                         | endpoint              |
 |----|---------------------------------|-----------------------|
 | 1. | to login/register               | /login                |
-| 2. | to add new markerter and prices | /nairobiprices/create |
-| 3. | to view prevailing prices       | /nairobiprices        |
+| 2. | to CRUD on current prices       | api/currentprices/    |
+| 3. |                                 |                       |
 |    |                                 |                       |
 
 - stop application ```control + c```
