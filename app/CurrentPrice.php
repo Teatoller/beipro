@@ -13,5 +13,14 @@ class CurrentPrice extends Model
         'ido',
         'fo',
         'lpg',
+        'front_office_id',
     ];
+
+    /**
+     * Get the front office that owns the current price.
+     */
+    public function frontOffice()
+    {
+        return $this->belongsTo('App\FrontOffice');
+    }
 }

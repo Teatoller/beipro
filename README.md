@@ -63,8 +63,10 @@ Test with Postman or equivalent
 | #  | purpose                         | endpoint              |
 |----|---------------------------------|-----------------------|
 | 1. | to login/register               | /login                |
-| 2. | to CRUD on current prices       | api/currentprices/    |
-| 3. |                                 |                       |
+| 2. | CRUD on current prices          | api/currentprices/    |
+| 3. | CRUD on front office            | api/frontoffices      |
 |    |                                 |                       |
+|    |                                 |                       |
+
 
 - stop application ```control + c```
