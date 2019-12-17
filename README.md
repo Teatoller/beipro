@@ -21,7 +21,8 @@ To check php version on your terminal run ```php -version```
 - ```mkdir project```
 - ```cd project```
 - ```git clone https://github.com/Teatoller/beipro.git```
--```cd beipro```
+- ```cd beipro```
+- ```git checkout develop```
 
 v. Open your choice editor  (for vscode run ```code .``` on terminal)
 
@@ -63,9 +64,9 @@ Test with Postman or equivalent
 | #  | purpose                         | endpoint              |
 |----|---------------------------------|-----------------------|
 | 1. | to login/register               | /login                |
-| 2. | CRUD on current prices          | api/currentprices/    |
+| 2. | CRUD on company                 | api/companies         |
 | 3. | CRUD on front office            | api/frontoffices      |
-|    |                                 |                       |
+| 4. | CRUD on current prices          | api/currentprices/    |
 |    |                                 |                       |
 
 

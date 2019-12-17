@@ -35,6 +35,9 @@ class FrontOfficeController extends Controller
         $frontoffice->code = $code;
         $frontoffice->location = $location;
 
+        $company_id = $request->input('company_id');
+        $frontoffice->company_id = $company_id;
+
         $frontoffice->save();
 
         return response()->json([
@@ -80,6 +83,7 @@ class FrontOfficeController extends Controller
             $frontoffice->location = is_null($location) ? $frontoffice->location : $location;
 
             $frontoffice->save();
+
             return response()->json([
                 "message" => "records updated successfully",
             ], 200);

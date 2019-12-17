@@ -15,8 +15,9 @@ class CreateFrontOfficesTable extends Migration
     {
         Schema::create('front_offices', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('company_id');
             $table->string('name');
-            $table->string('code');
+            $table->string('code')->unique();
             $table->string('location');
             $table->timestamps();
         });
