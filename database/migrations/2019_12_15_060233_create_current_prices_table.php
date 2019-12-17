@@ -15,6 +15,7 @@ class CreateCurrentPricesTable extends Migration
     {
         Schema::create('current_prices', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('front_office_id');
             $table->float('diesel')->nullable();
             $table->float('petrol')->nullable();
             $table->float('kerosene')->nullable();

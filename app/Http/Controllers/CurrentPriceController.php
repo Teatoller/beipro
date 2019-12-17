@@ -45,6 +45,9 @@ class CurrentPriceController extends Controller
             'lpg' => $request->get('lpg'),
         ]);
 
+        $front_office_id = $request->input('front_office_id');
+        $currentprice->front_office_id = $front_office_id;
+
         $currentprice->save();
 
         return response()->json([
@@ -90,15 +93,15 @@ class CurrentPriceController extends Controller
         ]);
 
         if (CurrentPrice::where('id', $id)->exists()) {
-            $nairobiprice = CurrentPrice::find($id);
-            $nairobiprice->diesel = $request->get('diesel');
-            $nairobiprice->petrol = $request->get('petrol');
-            $nairobiprice->kerosene = $request->get('kerosene');
-            $nairobiprice->ido = $request->get('ido');
-            $nairobiprice->fo = $request->get('fo');
-            $nairobiprice->lpg = $request->get('lpg');
+            $currentprice = CurrentPrice::find($id);
+            $currentprice->diesel = $request->get('diesel');
+            $currentprice->petrol = $request->get('petrol');
+            $currentprice->kerosene = $request->get('kerosene');
+            $currentprice->ido = $request->get('ido');
+            $currentprice->fo = $request->get('fo');
+            $currentprice->lpg = $request->get('lpg');
 
-            $nairobiprice->save();
+            $currentprice->save();
             return response()->json([
                 "message" => "records updated successfully",
             ], 200);
