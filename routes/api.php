@@ -33,4 +33,5 @@ Route::resource('user', 'Auth\UserController');
 Route::apiResources([
     'currentprices' => 'CurrentPriceController',
     'frontoffices' => 'FrontOfficeController',
+    'companies' => 'CompanyController',
 ]);
