@@ -22,4 +22,12 @@ class Company extends Model
     {
         return $this->hasMany('App\FrontOffice');
     }
+
+    /**
+     * Get the company Admins for the company.
+     */
+    public function companyAdmins()
+    {
+        return $this->hasMany('App\CompanyAdmin');
+    }
 }
