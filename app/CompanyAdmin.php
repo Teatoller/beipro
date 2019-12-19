@@ -25,4 +25,13 @@ class CompanyAdmin extends Model
     {
         return $this->belongsTo('App\Company');
     }
+
+    /**
+     * Get the admin that manages the company admins.
+     */
+    public function admins()
+    {
+        return $this->belongsTo('App\Admin');
+    }
+
 }
