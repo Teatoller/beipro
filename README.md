@@ -67,7 +67,9 @@ Test with Postman or equivalent
 | 2. | CRUD on company                 | api/companies         |
 | 3. | CRUD on front office            | api/frontoffices      |
 | 4. | CRUD on current prices          | api/currentprices/    |
+| 5. | CRUD on company admins          | api/companyadmins     |
 |    |                                 |                       |
+
 
 
 - stop application ```control + c```

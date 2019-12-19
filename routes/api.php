@@ -34,4 +34,5 @@ Route::apiResources([
     'currentprices' => 'CurrentPriceController',
     'frontoffices' => 'FrontOfficeController',
     'companies' => 'CompanyController',
+    'companyadmins' => 'CompanyAdminController',
 ]);
