@@ -35,4 +35,5 @@ Route::apiResources([
     'frontoffices' => 'FrontOfficeController',
     'companies' => 'CompanyController',
     'companyadmins' => 'CompanyAdminController',
+    'admins' => 'AdminController',
 ]);
