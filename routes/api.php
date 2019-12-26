@@ -37,3 +37,5 @@ Route::apiResources([
     'companyadmins' => 'CompanyAdminController',
     'admins' => 'AdminController',
 ]);
+
+Route::get('depotprices', 'DepotPriceController@index');
