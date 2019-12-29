@@ -89,7 +89,7 @@ class DepotPriceController extends Controller
 
         /**
          * Nakuru location
-         */
+        */
 
         $totalnkr = $depotprices
             ->where('name', 'Total Kenya')
@@ -123,7 +123,7 @@ class DepotPriceController extends Controller
 
         /**
          * Kisumu location
-         */
+        */
 
         $totalksm = $depotprices
             ->where('name', 'Total Kenya')
@@ -157,7 +157,7 @@ class DepotPriceController extends Controller
 
         /**
          * Eldoret location
-         */
+        */
 
         $totaleld = $depotprices
             ->where('name', 'Total Kenya')
@@ -191,7 +191,7 @@ class DepotPriceController extends Controller
 
         /**
          * A collection of all front offices current prices
-         */
+        */
 
         $collection = collect([
             $totalnrb, $totalmsa, $totalnkr, $totaleld, $totalksm,
