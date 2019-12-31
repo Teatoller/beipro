@@ -59,7 +59,9 @@ i. On terminal run ```php artisan serve```
 
 #### Endpoints
 
-Test with Postman or equivalent
+Test with Postman or equivalent.
+
+NB: When creating company **_ensure_** that they exactly match the name in the DepotPriceController
 
 | #  | purpose                         | endpoint              |
 |----|---------------------------------|-----------------------|
