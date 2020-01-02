@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -10,25 +11,25 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
-*/
+ */
 
-Route::get('test', function () {
-    return response(['message' => 'BeiPro API works well!'], 200);
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
 });
-
-Route::prefix('auth')->group(function () {
-    Route::post('login', 'Auth\AuthController@login');
-    Route::get('refresh', 'Auth\AuthController@refreshToken');
-
-    Route::middleware('auth:api')->group(function () {
-        Route::get('logout', 'Auth\AuthController@logout');
-        Route::get('test', function () {
-            return response(['message' => 'BeiPro authentication service works well!'], 200);
-        });
-    });
-});
-
 Route::resource('user', 'Auth\UserController');
+
+Route::post('register', 'AuthController@register');
+Route::post('login', 'AuthController@login');
+
+Route::group([
+    'middleware' => 'auth:api',
+], function () {
+    Route::get('/logout', 'AuthController@logout')->name('logout');
+    Route::post('profile', 'AuthController@profile');
+    Route::post('create', 'PasswordResetController@create');
+    Route::get('find/{token}', 'PasswordResetController@find');
+    Route::post('reset', 'PasswordResetController@reset');
+});
 
 Route::apiResources([
     'currentprices' => 'CurrentPriceController',
