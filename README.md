@@ -50,6 +50,8 @@ b. On terminal run  ```createdb beipro``` to create a postgreSQL db.
 1. Install dependencies
 
 - ```composer install --ignore-platform-reqs```
+- ```php artisan key:generate```
+- ```php artisan passport:install```
 
 2. Make sure the PostgreSQL server is running and run the following on your terminal
 
@@ -65,11 +67,17 @@ NB: When creating company **_ensure_** that they exactly match the name in the D
 
 | #  | purpose                         | endpoint              |
 |----|---------------------------------|-----------------------|
-| 1. | to login/register               | /login                |
-| 2. | CRUD on company                 | api/companies         |
-| 3. | CRUD on front office            | api/frontoffices      |
-| 4. | CRUD on current prices          | api/currentprices/    |
-| 5. | CRUD on company admins          | api/companyadmins     |
+| 1. | POST:register user              | api/register          |
+| 2. | POST:login user                 | api/login             |
+| 3. | GET: user profile               | api/profile           |
+| 4. | GET: userlogout                 | api/logout            |
+| 5. | POST:create password reset token| api/create            |
+| 6. | POST:find password reset token  | api/find{id}          |
+| 7. | POST:reset password             | api/reset             |
+| 8. | CRUD on company                 | api/companies         |
+| 9. | CRUD on front office            | api/frontoffices      |
+| 10.| CRUD on current prices          | api/currentprices/    |
+| 11.| CRUD on company admins          | api/companyadmins     |
 |    |                                 |                       |
 
 
