@@ -9,12 +9,11 @@ class CompanyAdmin extends Model
     protected $fillable = [
         'company_id',
         'admin_id',
-        'is_master',
+        'front_office_id',
         'firstname',
         'lastname',
         'staff_id',
         'email',
-        'password',
         'location_code',
     ];
 

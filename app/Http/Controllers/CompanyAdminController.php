@@ -26,27 +26,26 @@ class CompanyAdminController extends Controller
      */
     public function store(Request $request)
     {
-        $is_master = $request->is_master;
         $firstname = $request->firstname;
         $lastname = $request->lastname;
         $staff_id = $request->staff_id;
         $email = $request->email;
-        $password = $request->password;
         $location_code = $request->location_code;
 
         $companyadmin = new CompanyAdmin;
-        $companyadmin->is_master = $is_master;
         $companyadmin->firstname = $firstname;
         $companyadmin->lastname = $lastname;
         $companyadmin->staff_id = $staff_id;
         $companyadmin->email = $email;
-        $companyadmin->password = $password;
+
         $companyadmin->location_code = $location_code;
 
         $company_id = $request->input('company_id');
         $admin_id = $request->input('admin_id');
+        $front_office_id = $request->input('front_office_id');
         $companyadmin->company_id = $company_id;
         $companyadmin->admin_id = $admin_id;
+        $companyadmin->front_office_id = $front_office_id;
 
         $companyadmin->save();
 
@@ -85,23 +84,21 @@ class CompanyAdminController extends Controller
         if (CompanyAdmin::where('id', $id)->exists()) {
             $company_id = $request->company_id;
             $admin_id = $request->admin_id;
-            $is_master = $request->is_master;
+            $front_office_id = $request->front_office_id;
             $firstname = $request->firstname;
             $lastname = $request->lastname;
             $staff_id = $request->staff_id;
             $email = $request->email;
-            $password = $request->password;
             $location_code = $request->location_code;
 
             $companyadmin = CompanyAdmin::find($id);
             $companyadmin->company_id = is_null($company_id) ? $companyadmin->company_id : $company_id;
             $companyadmin->admin_id = is_null($admin_id) ? $companyadmin->admin_id : $admin_id;
-            $companyadmin->is_master = is_bool($is_master) ? $companyadmin->is_master : $is_master;
+            $companyadmin->front_office_id = is_null($admin_id) ? $companyadmin->front_office_id : $front_office_id;
             $companyadmin->firstname = is_null($firstname) ? $companyadmin->firstname : $firstname;
             $companyadmin->lastname = is_null($lastname) ? $companyadmin->lastname : $lastname;
             $companyadmin->staff_id = is_null($staff_id) ? $companyadmin->staff_id : $staff_id;
             $companyadmin->email = is_null($email) ? $companyadmin->email : $email;
-            $companyadmin->password = is_null($password) ? $companyadmin->password : $password;
             $companyadmin->location_code = is_null($location_code) ? $companyadmin->location_code : $location_code;
 
             $companyadmin->save();

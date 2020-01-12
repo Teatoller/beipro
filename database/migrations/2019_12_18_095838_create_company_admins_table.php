@@ -17,12 +17,11 @@ class CreateCompanyAdminsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('company_id');
             $table->bigInteger('admin_id');
-            $table->boolean('is_master');
+            $table->bigInteger('front_office_id');
             $table->string('firstname');
             $table->string('lastname');
             $table->string('staff_id');
             $table->string('email');
-            $table->string('password');
             $table->string('location_code');
             $table->timestamps();
         });
