@@ -30,14 +30,12 @@ class AdminController extends Controller
         $firstname = $request->firstname;
         $lastname = $request->lastname;
         $email = $request->email;
-        $password = $request->password;
 
         $admin = new Admin;
         $admin->company_id = $company_id;
         $admin->firstname = $firstname;
         $admin->lastname = $lastname;
         $admin->email = $email;
-        $admin->password = $password;
 
         $company_id = $request->input('company_id');
         $admin->company_id = $company_id;
@@ -81,14 +79,12 @@ class AdminController extends Controller
             $firstname = $request->firstname;
             $lastname = $request->lastname;
             $email = $request->email;
-            $password = $request->password;
 
             $admin = Admin::find($id);
             $admin->company_id = is_null($company_id) ? $admin->company_id : $company_id;
             $admin->firstname = is_null($firstname) ? $admin->firstname : $firstname;
             $admin->lastname = is_null($lastname) ? $admin->lastname : $lastname;
             $admin->email = is_null($email) ? $admin->email : $email;
-            $admin->password = is_null($password) ? $admin->password : $password;
 
             $admin->save();
 
