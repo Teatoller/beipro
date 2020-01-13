@@ -41,3 +41,4 @@ Route::apiResources([
 
 Route::get('depotprices', 'DepotPriceController@index');
 Route::get('frontadmins', 'AdminFrontofficeCombineController@index');
+Route::get('combineadmins', 'CombineCompanyAdminController@index');
