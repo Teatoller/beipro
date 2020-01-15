@@ -18,7 +18,8 @@ class CreateAdminsTable extends Migration
             $table->bigInteger('company_id');
             $table->string('firstname');
             $table->string('lastname');
-            $table->string('email');
+            $table->string('staff_id')->unique();
+            $table->string('email')->unique();
             $table->timestamps();
         });
     }
