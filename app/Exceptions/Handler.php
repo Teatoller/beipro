@@ -4,6 +4,9 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\UnauthorizedException;
+use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -46,6 +49,20 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if($exception instanceof ValidationException){
+            return response()->json(['message' => $exception->errors()], 422);
+        }
+
+        if ($exception instanceof NotFoundHttpException) {
+            $message = $exception->getMessage() ?: "End point doesn't exist";
+            return response()->json(['message' => $message], 404);
+        }
+
+        if ($exception instanceof UnauthorizedException) {
+            $message = $exception->getMessage() ?: "You are not authorized to access this endpoint!";
+            return response()->json(['message' => $message], 401);
+        }
+
         return parent::render($request, $exception);
     }
 }
