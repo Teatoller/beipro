@@ -2,14 +2,6 @@
 
 use Illuminate\Support\Str;
 
-// $DATABASE_URL=parse_url("DATABASE_URL");
-
-// $DATABASE_URL = parse_url(getenv('DATABASE_URL'));
-// $host =$DATABASE_URL["host"]?? null;
-// $username =$DATABASE_URL["user"]?? null;
-// $password =$DATABASE_URL["pass"]?? null;
-// $database =substr($DATABASE_URL["path"], 1)?? null;
-
 return [
 
     /*
@@ -23,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'pgsql_production'),
+    'default' => env('DB_CONNECTION', 'pgsql'),
 
     /*
     |--------------------------------------------------------------------------
@@ -85,32 +77,6 @@ return [
             'schema' => 'public',
             'sslmode' => 'prefer',
         ],
-
-        // 'pgsql' => [
-        //     'driver' => 'pgsql',
-        //     'host' => $DATABASE_URL["host"],
-        //     'port' => $DATABASE_URL["port"],
-        //     'database' => ltrim($DATABASE_URL["path"], "/"),
-        //     'username' => $DATABASE_URL["user"],
-        //     'password' => $DATABASE_URL["pass"],
-        //     'charset' => 'utf8',
-        //     'prefix' => '',
-        //     'schema' => 'public',
-        //     'sslmode' => 'require',
-        // ],
-
-        // 'pgsql_production' => [
-        //     'driver' => 'pgsql',
-        //     'host' => $host,
-        //     'port' => $port,
-        //     'database' => $database,
-        //     'username' => $username,
-        //     'password' => $password,
-        //     'charset' => 'utf8',
-        //     'prefix' => '',
-        //     'schema' => 'public',
-        //     'sslmode' => 'require',
-        // ],
 
         'sqlsrv' => [
             'driver' => 'sqlsrv',
