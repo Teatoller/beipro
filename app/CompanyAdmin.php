@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class CompanyAdmin extends Model
 {
     protected $fillable = [
-        'company_id',
         'admin_id',
         'front_office_id',
         'firstname',
         'lastname',
         'staff_id',
         'email',
+        'role',
         'location_code',
     ];
 
