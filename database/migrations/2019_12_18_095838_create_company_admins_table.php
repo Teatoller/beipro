@@ -20,8 +20,8 @@ class CreateCompanyAdminsTable extends Migration
             $table->bigInteger('front_office_id');
             $table->string('firstname');
             $table->string('lastname');
-            $table->string('staff_id');
-            $table->string('email');
+            $table->string('staff_id')->unique();
+            $table->string('email')->unique();
             $table->string('location_code');
             $table->timestamps();
         });
