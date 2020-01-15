@@ -94,7 +94,7 @@ class CompanyAdminController extends Controller
             $companyadmin = CompanyAdmin::find($id);
             $companyadmin->company_id = is_null($company_id) ? $companyadmin->company_id : $company_id;
             $companyadmin->admin_id = is_null($admin_id) ? $companyadmin->admin_id : $admin_id;
-            $companyadmin->front_office_id = is_null($admin_id) ? $companyadmin->front_office_id : $front_office_id;
+            $companyadmin->front_office_id = is_null($front_office_id) ? $companyadmin->front_office_id : $front_office_id;
             $companyadmin->firstname = is_null($firstname) ? $companyadmin->firstname : $firstname;
             $companyadmin->lastname = is_null($lastname) ? $companyadmin->lastname : $lastname;
             $companyadmin->staff_id = is_null($staff_id) ? $companyadmin->staff_id : $staff_id;
