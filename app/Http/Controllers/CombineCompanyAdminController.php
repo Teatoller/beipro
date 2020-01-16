@@ -15,7 +15,7 @@ class CombineCompanyAdminController extends Controller
     {
         $combineadmins = DB::table('companies')
             ->join('admins', 'admins.company_id', '=', 'companies.id')
-            ->select('companies.name', 'companies.country', 'admins.id', 'admins.email', 'admins.email')
+            ->select('companies.name', 'companies.country', 'admins.id', 'admins.email', 'admins.role')
             ->get();
 
         return response($combineadmins, 200);
