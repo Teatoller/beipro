@@ -15,13 +15,13 @@ class CreateCompanyAdminsTable extends Migration
     {
         Schema::create('company_admins', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('company_id');
             $table->bigInteger('admin_id');
             $table->bigInteger('front_office_id');
             $table->string('firstname');
             $table->string('lastname');
             $table->string('staff_id')->unique();
             $table->string('email')->unique();
+            $table->string('role');
             $table->string('location_code');
             $table->timestamps();
         });

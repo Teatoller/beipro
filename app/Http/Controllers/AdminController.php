@@ -31,6 +31,7 @@ class AdminController extends Controller
         $firstname = $request->firstname;
         $lastname = $request->lastname;
         $email = $request->email;
+        $role = $request->role;
 
         $admin = new Admin;
         $admin->company_id = $company_id;
@@ -38,6 +39,7 @@ class AdminController extends Controller
         $admin->firstname = $firstname;
         $admin->lastname = $lastname;
         $admin->email = $email;
+        $admin->role = $role;
 
         $company_id = $request->input('company_id');
         $admin->company_id = $company_id;
@@ -82,6 +84,7 @@ class AdminController extends Controller
             $lastname = $request->lastname;
             $staff_id = $request->staff_id;
             $email = $request->email;
+            $role = $request->role;
 
             $admin = Admin::find($id);
             $admin->company_id = is_null($company_id) ? $admin->company_id : $company_id;
@@ -89,6 +92,7 @@ class AdminController extends Controller
             $admin->lastname = is_null($lastname) ? $admin->lastname : $lastname;
             $admin->staff_id = is_null($staff_id) ? $admin->staff_id : $staff_id;
             $admin->email = is_null($email) ? $admin->email : $email;
+            $admin->role = is_null($role) ? $admin->role : $role;
 
             $admin->save();
 
