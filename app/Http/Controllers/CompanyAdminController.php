@@ -26,6 +26,8 @@ class CompanyAdminController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', CompanyAdmin::class);
+
         $firstname = $request->firstname;
         $lastname = $request->lastname;
         $staff_id = $request->staff_id;
@@ -81,6 +83,8 @@ class CompanyAdminController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->authorize('update', CompanyAdmin::class);
+
         if (CompanyAdmin::where('id', $id)->exists()) {
             $admin_id = $request->admin_id;
             $front_office_id = $request->front_office_id;
@@ -121,6 +125,8 @@ class CompanyAdminController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('delete', $id);
+
         if (CompanyAdmin::where('id', $id)->exists()) {
             $companyadmin = CompanyAdmin::find($id);
             $companyadmin->delete();
