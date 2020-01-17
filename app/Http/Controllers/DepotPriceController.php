@@ -6,6 +6,11 @@ use Illuminate\Support\Facades\DB;
 
 class DepotPriceController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a combined listing of the company name the front offices
      * and product prices posted over time in descending order.

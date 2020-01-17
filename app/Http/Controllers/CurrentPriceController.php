@@ -27,6 +27,8 @@ class CurrentPriceController extends Controller
      */
     public function store(Request $request)
     {
+        // $this->authorize('create', CurrentPrice::class);
+
         $request->validate([
             'diesel' => 'nullable|between:0, 9999.99',
             'petrol' => 'nullable|between:0, 9999.99',
@@ -83,6 +85,8 @@ class CurrentPriceController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // $this->authorize('update', CurrentPrice::class);
+
         $request->validate([
             'diesel' => 'nullable|between:0, 9999.99',
             'petrol' => 'nullable|between:0, 9999.99',
@@ -121,6 +125,8 @@ class CurrentPriceController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('delete', $id);
+
         if (CurrentPrice::where('id', $id)->exists()) {
             $currentprice = CurrentPrice::find($id);
             $currentprice->delete();
