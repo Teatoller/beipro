@@ -27,15 +27,19 @@ class AdminController extends Controller
     public function store(Request $request)
     {
         $company_id = $request->company_id;
+        $staff_id = $request->staff_id;
         $firstname = $request->firstname;
         $lastname = $request->lastname;
         $email = $request->email;
+        $role = $request->role;
 
         $admin = new Admin;
         $admin->company_id = $company_id;
+        $admin->staff_id = $staff_id;
         $admin->firstname = $firstname;
         $admin->lastname = $lastname;
         $admin->email = $email;
+        $admin->role = $role;
 
         $company_id = $request->input('company_id');
         $admin->company_id = $company_id;
@@ -78,13 +82,17 @@ class AdminController extends Controller
             $company_id = $request->company_id;
             $firstname = $request->firstname;
             $lastname = $request->lastname;
+            $staff_id = $request->staff_id;
             $email = $request->email;
+            $role = $request->role;
 
             $admin = Admin::find($id);
             $admin->company_id = is_null($company_id) ? $admin->company_id : $company_id;
             $admin->firstname = is_null($firstname) ? $admin->firstname : $firstname;
             $admin->lastname = is_null($lastname) ? $admin->lastname : $lastname;
+            $admin->staff_id = is_null($staff_id) ? $admin->staff_id : $staff_id;
             $admin->email = is_null($email) ? $admin->email : $email;
+            $admin->role = is_null($role) ? $admin->role : $role;
 
             $admin->save();
 

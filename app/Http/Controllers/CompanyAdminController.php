@@ -30,6 +30,7 @@ class CompanyAdminController extends Controller
         $lastname = $request->lastname;
         $staff_id = $request->staff_id;
         $email = $request->email;
+        $role = $request->role;
         $location_code = $request->location_code;
 
         $companyadmin = new CompanyAdmin;
@@ -37,13 +38,12 @@ class CompanyAdminController extends Controller
         $companyadmin->lastname = $lastname;
         $companyadmin->staff_id = $staff_id;
         $companyadmin->email = $email;
+        $companyadmin->role = $role;
 
         $companyadmin->location_code = $location_code;
 
-        $company_id = $request->input('company_id');
         $admin_id = $request->input('admin_id');
         $front_office_id = $request->input('front_office_id');
-        $companyadmin->company_id = $company_id;
         $companyadmin->admin_id = $admin_id;
         $companyadmin->front_office_id = $front_office_id;
 
@@ -82,23 +82,23 @@ class CompanyAdminController extends Controller
     public function update(Request $request, $id)
     {
         if (CompanyAdmin::where('id', $id)->exists()) {
-            $company_id = $request->company_id;
             $admin_id = $request->admin_id;
             $front_office_id = $request->front_office_id;
             $firstname = $request->firstname;
             $lastname = $request->lastname;
             $staff_id = $request->staff_id;
             $email = $request->email;
+            $role = $request->role;
             $location_code = $request->location_code;
 
             $companyadmin = CompanyAdmin::find($id);
-            $companyadmin->company_id = is_null($company_id) ? $companyadmin->company_id : $company_id;
             $companyadmin->admin_id = is_null($admin_id) ? $companyadmin->admin_id : $admin_id;
-            $companyadmin->front_office_id = is_null($admin_id) ? $companyadmin->front_office_id : $front_office_id;
+            $companyadmin->front_office_id = is_null($front_office_id) ? $companyadmin->front_office_id : $front_office_id;
             $companyadmin->firstname = is_null($firstname) ? $companyadmin->firstname : $firstname;
             $companyadmin->lastname = is_null($lastname) ? $companyadmin->lastname : $lastname;
             $companyadmin->staff_id = is_null($staff_id) ? $companyadmin->staff_id : $staff_id;
             $companyadmin->email = is_null($email) ? $companyadmin->email : $email;
+            $companyadmin->role = is_null($role) ? $companyadmin->role : $role;
             $companyadmin->location_code = is_null($location_code) ? $companyadmin->location_code : $location_code;
 
             $companyadmin->save();

@@ -14,8 +14,9 @@ class AdminFrontofficeCombineController extends Controller
     public function index()
     {
         $frontadmins = DB::table('companies')
-            ->join('company_admins', 'company_admins.company_id', '=', 'companies.id')
-            ->select('companies.name', 'companies.country', 'company_admins.admin_id', 'company_admins.front_office_id', 'company_admins.email')
+            ->join('admins', 'admins.company_id', '=', 'companies.id')
+            ->join('company_admins', 'company_admins.admin_id', '=', 'admins.id')
+            ->select('companies.name', 'companies.country', 'company_admins.front_office_id', 'company_admins.email', 'company_admins.role')
             ->get();
 
         return response($frontadmins, 200);
