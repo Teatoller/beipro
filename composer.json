@@ -17,7 +17,7 @@
         "laravel/helpers": "^1.1",
         "laravel/passport": "^8.1",
         "laravel/tinker": "^1.0",
-        "nesbot/carbon": "^2.28",
+        "nesbot/carbon": "^2.29",
         "squizlabs/php_codesniffer": "^3.4",
         "tymon/jwt-auth": "^1.0"
     },

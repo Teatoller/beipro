@@ -26,6 +26,11 @@ Route::group([
 ], function () {
     Route::get('/logout', 'AuthController@logout')->name('logout');
     Route::post('profile', 'AuthController@profile');
+});
+
+Route::group([ 
+    'middleware' => 'api',   
+], function () {    
     Route::post('create', 'PasswordResetController@create');
     Route::get('find/{token}', 'PasswordResetController@find');
     Route::post('reset', 'PasswordResetController@reset');
