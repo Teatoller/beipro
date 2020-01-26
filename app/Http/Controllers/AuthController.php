@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Notifications\RegisterActivate;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -14,20 +18,44 @@ class AuthController extends Controller
      */
     public function register(Request $request)
     {
-        $validateData = $request->validate([
-            'firstname' => 'required|max:55',
-            'lastname' => 'required|max:55',
-            'email' => 'email|required|unique:users',
-            'password' => 'required|confirmed',
+        $request->validate([
+            'firstname' => 'required|string|max:55',
+            'lastname' => 'required|string|max:55',
+            'email' => 'required|string|email|unique:users',
+            'password' => 'required|string|confirmed',
         ]);
+        $user = new User([
+            'firstname' => $request->firstname,
+            'lastname' => $request->lastname,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'activation_token' => str::random(60),
+        ]);
+        $user->save();
+        $user->notify(new RegisterActivate($user));
+        return response()->json([
+            'message' => 'Successfully created user!',
+        ], 201);
+    }
 
-        $validateData['password'] = bcrypt($validateData['password']);
+    /**
+     * Signup activate a new user account.
+     *@param  int  $token
+     * @return \Illuminate\Http\Response
+     */
 
-        $user = User::create($validateData);
-
-        $accessToken = $user->createToken('authToken')->accessToken;
-
-        return response(['user' => $user, 'access_token' => $accessToken]);
+    public function registerActivate($token)
+    {
+        $user = User::where('activation_token', $token)->first();
+        if (!$user) {
+            return response()->json([
+                'message' => 'This activation token is invalid.',
+            ], 404);
+        }
+        $user->active = true;
+        $user->activation_token = '';
+        $user->save();
+        return $user;
     }
 
     /**
@@ -38,18 +66,33 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-        $loginData = $request->validate([
-            'email' => 'email|required',
-            'password' => 'required',
+        $request->validate([
+            'email' => 'required|string|email',
+            'password' => 'required|string',
+            'remember_me' => 'boolean',
         ]);
-
-        if (!auth()->attempt($loginData)) {
-            return response(['message' => 'Invalid credentials'], 401);
+        $loginData = request(['email', 'password']);
+        $loginData['active'] = 1;
+        $loginData['deleted_at'] = null;
+        if (!Auth::attempt($loginData)) {
+            return response()->json([
+                'message' => 'Unauthorized',
+            ], 401);
         }
 
-        $accessToken = auth()->user()->createToken('authToken')->accessToken;
+        $user = $request->user();
+        $tokenResult = $user->createToken('Personal Access Token');
+        $token = $tokenResult->token;
+        if ($request->remember_me) {
+            $token->expires_at = Carbon::now()->addWeeks(1);
+        }
 
-        return response(['user' => auth()->user(), 'access_token' => $accessToken]);
+        $token->save();
+        return response()->json([
+            'access_token' => $tokenResult->accessToken,
+            'token_type' => 'Bearer',
+            'expires_at' => Carbon::parse($tokenResult->token->expires_at)->toDateTimeString(),
+        ]);
     }
 
     /**
