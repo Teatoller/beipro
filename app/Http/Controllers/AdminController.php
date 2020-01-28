@@ -26,6 +26,15 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'company_id' => 'required',
+            'staff_id' => 'required|string',
+            'firstname' => 'required|string',
+            'lastname' => 'required|string',
+            'email' => 'required|string|email',
+            'role' => 'required|string',
+        ]);
+
         $company_id = $request->company_id;
         $staff_id = $request->staff_id;
         $firstname = $request->firstname;
@@ -78,6 +87,15 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'company_id' => 'required',
+            'staff_id' => 'required|string',
+            'firstname' => 'required|string',
+            'lastname' => 'required|string',
+            'email' => 'required|string|email',
+            'role' => 'required|string',
+        ]);
+
         if (Admin::where('id', $id)->exists()) {
             $company_id = $request->company_id;
             $firstname = $request->firstname;
