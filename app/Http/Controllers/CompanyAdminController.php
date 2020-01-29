@@ -26,6 +26,16 @@ class CompanyAdminController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'front_office_id' => 'required',
+            'firstname' => 'required|string',
+            'lastname' => 'required|string',
+            'staff_id' => 'required|string',
+            'email' => 'required|string|email',
+            'role' => 'required|string',
+            'location_code' => 'required|string',
+        ]);
+
         $firstname = $request->firstname;
         $lastname = $request->lastname;
         $staff_id = $request->staff_id;
@@ -81,6 +91,16 @@ class CompanyAdminController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'front_office_id' => 'required',
+            'firstname' => 'required|string',
+            'lastname' => 'required|string',
+            'staff_id' => 'required|string',
+            'email' => 'required|string|email',
+            'role' => 'required|string',
+            'location_code' => 'required|string',
+        ]);
+
         if (CompanyAdmin::where('id', $id)->exists()) {
             $admin_id = $request->admin_id;
             $front_office_id = $request->front_office_id;
