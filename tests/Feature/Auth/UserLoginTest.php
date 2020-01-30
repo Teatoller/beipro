@@ -55,6 +55,7 @@ class UserLoginTest extends TestCase
      */
     public function testWithoutProvidingValidEmail()
     {
+        $this->withoutExceptionHandling();
         $this->postData['email'] = 'johndoe@email';
         $this->getResponse($this->postData)
             ->assertStatus(422)
@@ -72,6 +73,7 @@ class UserLoginTest extends TestCase
      */
     public function testUsingValidData()
     {
+        $this->withoutExceptionHandling();
         $this->getResponse($this->postData)
             ->assertStatus(200)
             ->assertJson([
@@ -92,7 +94,7 @@ class UserLoginTest extends TestCase
      */
     protected function getResponse($data)
     {
-        return $this->post('/api/auth/login', $data);
+        return $this->post('/api/login', $data);
     }
 
     /**

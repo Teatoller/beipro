@@ -1,5 +1,7 @@
 # Beipro
 
+[![Build Status](https://travis-ci.com/Teatoller/beipro.svg?token=uGyXyCMx2EKqAzHfANFR&branch=develop)](https://travis-ci.com/Teatoller/beipro)
+
 ## Prerequisites
 
 - PHP version 7.2.8
@@ -83,3 +85,5 @@ NB: When creating company **_ensure_** that they exactly match the name in the D
 
 
 - stop application ```control + c```
+
+3. To run test on terminal enter `vendor/bin/phpunit`

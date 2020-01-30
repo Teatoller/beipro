@@ -24,7 +24,9 @@ class UserLogoutTest extends TestCase
     {
         $this->login();
 
-        $this->get('api/auth/test')->assertStatus(200);
+        // $this->withoutExceptionHandling();
+
+        $this->get('api/logout')->assertStatus(200);
 
         $this->logout()
             ->assertStatus(200)
@@ -32,7 +34,7 @@ class UserLogoutTest extends TestCase
                 'message' => ResponseMessages::getResponseMessage(200, ['action' => 'logout']),
             ]);
 
-        $this->get('api/auth/test')->assertStatus(401);
+        $this->get('api/logout')->assertStatus(401);
     }
 
     /**
@@ -42,7 +44,7 @@ class UserLogoutTest extends TestCase
      */
     protected function login()
     {
-        return $this->post('/api/auth/login', $this->postData)->json();
+        return $this->post('/api/login', $this->postData)->json();
     }
 
     /**
@@ -52,6 +54,6 @@ class UserLogoutTest extends TestCase
      */
     protected function logout()
     {
-        return $this->get('/api/auth/logout');
+        return $this->get('/api/logout');
     }
 }

@@ -14,3 +14,4 @@ yarn-error.log
 build/
 docker/docker-postgresql-multiple-databases/
 .idea/
+/tests/log

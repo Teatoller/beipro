@@ -1,0 +1,25 @@
+Example (Tests\Unit\Example)
+ [ ] Basic test
+
+User Login (Tests\Feature\UserLogin)
+ [ ] Without providing email
+ [ ] Without providing password
+ [ ] Without providing valid password
+ [ ] Without providing valid email
+ [ ] Using valid data
+
+User Logout (Tests\Feature\UserLogout)
+ [ ] Using valid access token
+
+User Refresh Token (Tests\Feature\UserRefreshToken)
+ [ ] Using valid access token
+
+Create User (Tests\Feature\CreateUser)
+ [ ] Without providing firstname
+ [ ] Without providing lastname
+ [ ] Without providing email
+ [ ] Without providing password
+ [ ] Without providing valid password
+ [ ] Without providing valid email
+ [ ] Using valid data
+
