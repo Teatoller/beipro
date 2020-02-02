@@ -92,7 +92,7 @@ class UserLoginTest extends TestCase
      */
     protected function getResponse($data)
     {
-        return $this->post('/api/auth/login', $data);
+        return $this->post('/api/login', $data);
     }
 
     /**

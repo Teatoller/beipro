@@ -42,7 +42,7 @@ class UserRefreshTokenTest extends TestCase
      */
     protected function login()
     {
-        return $this->post('/api/auth/login', $this->postData)->json();
+        return $this->post('/api/login', $this->postData)->json();
     }
 
     /**
