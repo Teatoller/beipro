@@ -3,6 +3,7 @@
          backupStaticAttributes="false"
          bootstrap="vendor/autoload.php"
          colors="true"
+         printerClass="Codedungeon\PHPUnitPrettyResultPrinter\Printer"
          convertErrorsToExceptions="true"
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true"
@@ -20,8 +21,24 @@
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">./app</directory>
+            <exclude>
+                <directory suffix=".php">./app/Policies/</directory>
+                <directory suffix=".php">./app/Http/Middleware/</directory>
+                <directory suffix=".php">./app/Models/</directory>
+                <directory suffix=".php">./app/Feedback.php</directory>
+                <directory suffix=".php">./app/Http/Kernel.php</directory>
+                <directory suffix=".php">./app/Exceptions/Handler.php</directory>
+                <directory suffix=".php">./app/Providers/</directory>
+                <directory suffix=".php">./app/Mail/</directory>
+            </exclude>
         </whitelist>
     </filter>
+    <logging>
+        <log type="coverage-html" target="tests/log/report" lowUpperBound="35" highLowerBound="70"/>
+        <log type="coverage-text" target="php://stdout" showUncoveredFiles="false"/>
+        <log type="testdox-html" target="tests/log/testdox.html"/>
+        <log type="testdox-text" target="tests/log/testdox.txt"/>
+    </logging>
     <php>
         <server name="APP_ENV" value="testing"/>
         <server name="BCRYPT_ROUNDS" value="4"/>
@@ -29,5 +46,7 @@
         <server name="MAIL_DRIVER" value="array"/>
         <server name="QUEUE_CONNECTION" value="sync"/>
         <server name="SESSION_DRIVER" value="array"/>
+        <env name="DB_CONNECTION" value="pgsql"/>
+        <ini name="memory_limit" value="2000M" />
     </php>
 </phpunit>

@@ -83,3 +83,5 @@ NB: When creating company **_ensure_** that they exactly match the name in the D
 
 
 - stop application ```control + c```
+
+3. To run test `vendor/bin/phpunit`

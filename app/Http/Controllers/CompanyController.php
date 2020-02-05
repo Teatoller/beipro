@@ -26,6 +26,14 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|string',
+            'description' => 'required|string',
+            'location' => 'required|string',
+            'country' => 'required|string',
+            'established' => 'required|string',
+        ]);
+
         $name = $request->name;
         $logo = $request->logo;
         $description = $request->description;
@@ -75,6 +83,14 @@ class CompanyController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => 'required|string',
+            'description' => 'required|string',
+            'location' => 'required|string',
+            'country' => 'required|string',
+            'established' => 'required|string',
+        ]);
+
         if (Company::where('id', $id)->exists()) {
             $name = $request->name;
             $logo = $request->logo;

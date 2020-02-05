@@ -26,6 +26,13 @@ class FrontOfficeController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'company_id' => 'required',
+            'name' => 'required|string',
+            'code' => 'required|string',
+            'location' => 'required|string',
+        ]);
+
         $name = $request->name;
         $code = $request->code;
         $location = $request->location;
@@ -72,6 +79,13 @@ class FrontOfficeController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'company_id' => 'required',
+            'name' => 'required|string',
+            'code' => 'required|string',
+            'location' => 'required|string',
+        ]);
+
         if (FrontOffice::where('id', $id)->exists()) {
             $name = $request->name;
             $code = $request->code;

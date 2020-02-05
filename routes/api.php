@@ -20,6 +20,7 @@ Route::resource('user', 'Auth\UserController');
 
 Route::post('register', 'AuthController@register');
 Route::post('login', 'AuthController@login');
+Route::get('register/activate/{token}', 'AuthController@registerActivate');
 
 Route::group([
     'middleware' => 'auth:api',
@@ -28,9 +29,9 @@ Route::group([
     Route::post('profile', 'AuthController@profile');
 });
 
-Route::group([ 
-    'middleware' => 'api',   
-], function () {    
+Route::group([
+    'middleware' => 'api',
+], function () {
     Route::post('create', 'PasswordResetController@create');
     Route::get('find/{token}', 'PasswordResetController@find');
     Route::post('reset', 'PasswordResetController@reset');
