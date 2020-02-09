@@ -76,7 +76,7 @@ class AuthController extends Controller
         $loginData['deleted_at'] = null;
         if (!Auth::attempt($loginData)) {
             return response()->json([
-                'message' => 'Unauthorized',
+                'message' => "Unauthorized. First time login? Activate account from  your inbox before continuing. Else check that the email and password are correct",
             ], 401);
         }
 
@@ -89,7 +89,7 @@ class AuthController extends Controller
 
         $token->save();
         return response()->json([
-            'email'=> $user->email,
+            'email' => $user->email,
             'access_token' => $tokenResult->accessToken,
             'token_type' => 'Bearer',
             'expires_at' => Carbon::parse($tokenResult->token->expires_at)->toDateTimeString(),
