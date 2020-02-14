@@ -16,12 +16,12 @@ class CreateCurrentPricesTable extends Migration
         Schema::create('current_prices', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('front_office_id');
-            $table->float('diesel')->nullable();
-            $table->float('petrol')->nullable();
-            $table->float('kerosene')->nullable();
-            $table->float('ido')->nullable();
-            $table->float('fo')->nullable();
-            $table->float('lpg')->nullable();
+            $table->decimal('diesel', 8, 2)->nullable();
+            $table->decimal('petrol', 8, 2)->nullable();
+            $table->decimal('kerosene', 8, 2)->nullable();
+            $table->decimal('ido', 8, 2)->nullable();
+            $table->decimal('fo', 8, 2)->nullable();
+            $table->decimal('lpg', 8, 2)->nullable();
             $table->timestamps();
         });
     }
