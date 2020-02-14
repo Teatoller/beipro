@@ -14,6 +14,14 @@ class FrontOffice extends Model
     ];
 
     /**
+     * Get the beipro super admin that manages the front offices.
+     */
+    public function superAdmins()
+    {
+        return $this->belongsTo('App\SuperAdmin');
+    }
+
+    /**
      * Get the company that owns the front office.
      */
     public function company()
