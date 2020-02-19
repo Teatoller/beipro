@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Storage;
 use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
@@ -30,7 +29,6 @@ class User extends Authenticatable
         'password',
         'active',
         'activation_token',
-        'avatar',
     ];
 
     /**
@@ -51,15 +49,4 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    /**
-     * The attributes that gets avatar url
-     *
-     * @var array
-     */
-
-    protected $appends = ['avatar_url'];
-    public function getAvatarUrlAttribute()
-    {
-        return Storage::url('avatars/'.$this->id.'/'.$this->avatar);
-    }
 }
