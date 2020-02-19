@@ -2,17 +2,12 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Models\User;
 use App\Notifications\RegisterActivate;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Intervention\Image\Image;
-// use Laravolt\Avatar\Avatar;
-use Laravolt\Avatar\Facade as Avatar;
 
 class AuthController extends Controller
 {
@@ -37,10 +32,6 @@ class AuthController extends Controller
             'activation_token' => str::random(60),
         ]);
         $user->save();
-
-        $avatar = Avatar::create($user->firstname)->getImageObject()->encode('png');
-
-        Storage::put('avatars/' . $user->id . '/avatar.png', (string) $avatar);
 
         $user->notify(new RegisterActivate($user));
         return response()->json([
