@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class FrontOffice extends Model
+class FrontOffice extends Model implements Auditable
 {
+    use \OwenIt\Auditing\Auditable;
+
     protected $fillable = [
         'name',
         'code',
@@ -35,5 +38,15 @@ class FrontOffice extends Model
     public function currentPrices()
     {
         return $this->hasMany('App\CurrentPrice');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function generateTags(): array
+    {
+        return [
+            $this->name,
+        ];
     }
 }

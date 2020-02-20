@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class Admin extends Model
+class Admin extends Model implements Auditable
 {
+    use \OwenIt\Auditing\Auditable;
+
     protected $fillable = [
         'company_id',
         'firstname',
@@ -36,5 +39,15 @@ class Admin extends Model
     public function companyAdmins()
     {
         return $this->hasMany('App\CompanyAdmin');
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function generateTags(): array
+    {
+        return [
+            $this->company_id,
+        ];
     }
 }
