@@ -66,7 +66,7 @@ class DepotPriceController extends Controller
             ->take(1);
 
         $oryxnrb = $depotprices
-            ->where('name', 'Oryx Energies Kenya')
+            ->where('name', 'Oryx Energies ')
             ->where('location', 'Nairobi')
             ->unique()->sortBy('id', SORT_REGULAR, true)
             ->take(1);
@@ -78,7 +78,7 @@ class DepotPriceController extends Controller
             ->take(1);
 
         $galananrb = $depotprices
-            ->where('name', 'Galana Oil kenya')
+            ->where('name', 'Galana Oil')
             ->where('location', 'Nairobi')
             ->unique()->sortBy('id', SORT_REGULAR, true)
             ->take(1);
@@ -120,7 +120,7 @@ class DepotPriceController extends Controller
             ->take(1);
 
         $kencornrb = $depotprices
-            ->where('name', 'KENCOR Petroleum')
+            ->where('name', 'Kencor Petroleum')
             ->where('location', 'Nairobi')
             ->unique()->sortBy('id', SORT_REGULAR, true)
             ->take(1);
@@ -138,7 +138,7 @@ class DepotPriceController extends Controller
             ->take(1);
 
         $ainunrb = $depotprices
-            ->where('name', 'Ainu Shamsi Energy')
+            ->where('name', 'Ainu Shamsi')
             ->where('location', 'Nairobi')
             ->unique()->sortBy('id', SORT_REGULAR, true)
             ->take(1);
@@ -150,7 +150,7 @@ class DepotPriceController extends Controller
             ->take(1);
 
         $olympicnrb = $depotprices
-            ->where('name', 'OLYMPIC Petroleum')
+            ->where('name', 'Olympic Petroleum')
             ->where('location', 'Nairobi')
             ->unique()->sortBy('id', SORT_REGULAR, true)
             ->take(1);
@@ -204,7 +204,7 @@ class DepotPriceController extends Controller
             ->take(1);
 
         $brainnrb = $depotprices
-            ->where('name', 'Brain Field Oil')
+            ->where('name', 'Brain Field')
             ->where('location', 'Nairobi')
             ->unique()->sortBy('id', SORT_REGULAR, true)
             ->take(1);
@@ -358,7 +358,7 @@ class DepotPriceController extends Controller
             ->take(1);
 
         $oryxmsa = $depotprices
-            ->where('name', 'Oryx Energies Kenya')
+            ->where('name', 'Oryx Energies ')
             ->where('location', 'Mombasa')
             ->unique()->sortBy('id', SORT_REGULAR, true)
             ->take(1);
@@ -370,7 +370,7 @@ class DepotPriceController extends Controller
             ->take(1);
 
         $galanamsa = $depotprices
-            ->where('name', 'Galana Oil kenya')
+            ->where('name', 'Galana Oil')
             ->where('location', 'Mombasa')
             ->unique()->sortBy('id', SORT_REGULAR, true)
             ->take(1);
@@ -412,7 +412,7 @@ class DepotPriceController extends Controller
             ->take(1);
 
         $kencormsa = $depotprices
-            ->where('name', 'KENCOR Petroleum')
+            ->where('name', 'Kencor Petroleum')
             ->where('location', 'Mombasa')
             ->unique()->sortBy('id', SORT_REGULAR, true)
             ->take(1);
@@ -430,7 +430,7 @@ class DepotPriceController extends Controller
             ->take(1);
 
         $ainumsa = $depotprices
-            ->where('name', 'Ainu Shamsi Energy')
+            ->where('name', 'Ainu Shamsi')
             ->where('location', 'Mombasa')
             ->unique()->sortBy('id', SORT_REGULAR, true)
             ->take(1);
@@ -442,7 +442,7 @@ class DepotPriceController extends Controller
             ->take(1);
 
         $olympicmsa = $depotprices
-            ->where('name', 'OLYMPIC Petroleum')
+            ->where('name', 'Olympic Petroleum')
             ->where('location', 'Mombasa')
             ->unique()->sortBy('id', SORT_REGULAR, true)
             ->take(1);
@@ -496,7 +496,7 @@ class DepotPriceController extends Controller
             ->take(1);
 
         $brainmsa = $depotprices
-            ->where('name', 'Brain Field Oil')
+            ->where('name', 'Brain Field')
             ->where('location', 'Mombasa')
             ->unique()->sortBy('id', SORT_REGULAR, true)
             ->take(1);
@@ -650,7 +650,7 @@ class DepotPriceController extends Controller
             ->take(1);
 
         $oryxnkr = $depotprices
-            ->where('name', 'Oryx Energies Kenya')
+            ->where('name', 'Oryx Energies ')
             ->where('location', 'Nakuru')
             ->unique()->sortBy('id', SORT_REGULAR, true)
             ->take(1);
@@ -662,7 +662,7 @@ class DepotPriceController extends Controller
             ->take(1);
 
         $galanankr = $depotprices
-            ->where('name', 'Galana Oil kenya')
+            ->where('name', 'Galana Oil')
             ->where('location', 'Nakuru')
             ->unique()->sortBy('id', SORT_REGULAR, true)
             ->take(1);
@@ -704,7 +704,7 @@ class DepotPriceController extends Controller
             ->take(1);
 
         $kencornkr = $depotprices
-            ->where('name', 'KENCOR Petroleum')
+            ->where('name', 'Kencor Petroleum')
             ->where('location', 'Nakuru')
             ->unique()->sortBy('id', SORT_REGULAR, true)
             ->take(1);
@@ -722,7 +722,7 @@ class DepotPriceController extends Controller
             ->take(1);
 
         $ainunkr = $depotprices
-            ->where('name', 'Ainu Shamsi Energy')
+            ->where('name', 'Ainu Shamsi')
             ->where('location', 'Nakuru')
             ->unique()->sortBy('id', SORT_REGULAR, true)
             ->take(1);
@@ -734,7 +734,7 @@ class DepotPriceController extends Controller
             ->take(1);
 
         $olympicnkr = $depotprices
-            ->where('name', 'OLYMPIC Petroleum')
+            ->where('name', 'Olympic Petroleum')
             ->where('location', 'Nakuru')
             ->unique()->sortBy('id', SORT_REGULAR, true)
             ->take(1);
@@ -788,7 +788,7 @@ class DepotPriceController extends Controller
             ->take(1);
 
         $brainnkr = $depotprices
-            ->where('name', 'Brain Field Oil')
+            ->where('name', 'Brain Field')
             ->where('location', 'Nakuru')
             ->unique()->sortBy('id', SORT_REGULAR, true)
             ->take(1);
@@ -942,7 +942,7 @@ class DepotPriceController extends Controller
             ->take(1);
 
         $oryxksm = $depotprices
-            ->where('name', 'Oryx Energies Kenya')
+            ->where('name', 'Oryx Energies ')
             ->where('location', 'Kisumu')
             ->unique()->sortBy('id', SORT_REGULAR, true)
             ->take(1);
@@ -954,7 +954,7 @@ class DepotPriceController extends Controller
             ->take(1);
 
         $galanaksm = $depotprices
-            ->where('name', 'Galana Oil kenya')
+            ->where('name', 'Galana Oil')
             ->where('location', 'Kisumu')
             ->unique()->sortBy('id', SORT_REGULAR, true)
             ->take(1);
@@ -996,7 +996,7 @@ class DepotPriceController extends Controller
             ->take(1);
 
         $kencorksm = $depotprices
-            ->where('name', 'KENCOR Petroleum')
+            ->where('name', 'Kencor Petroleum')
             ->where('location', 'Kisumu')
             ->unique()->sortBy('id', SORT_REGULAR, true)
             ->take(1);
@@ -1014,7 +1014,7 @@ class DepotPriceController extends Controller
             ->take(1);
 
         $ainuksm = $depotprices
-            ->where('name', 'Ainu Shamsi Energy')
+            ->where('name', 'Ainu Shamsi')
             ->where('location', 'Kisumu')
             ->unique()->sortBy('id', SORT_REGULAR, true)
             ->take(1);
@@ -1026,7 +1026,7 @@ class DepotPriceController extends Controller
             ->take(1);
 
         $olympicksm = $depotprices
-            ->where('name', 'OLYMPIC Petroleum')
+            ->where('name', 'Olympic Petroleum')
             ->where('location', 'Kisumu')
             ->unique()->sortBy('id', SORT_REGULAR, true)
             ->take(1);
@@ -1080,7 +1080,7 @@ class DepotPriceController extends Controller
             ->take(1);
 
         $brainksm = $depotprices
-            ->where('name', 'Brain Field Oil')
+            ->where('name', 'Brain Field')
             ->where('location', 'Kisumu')
             ->unique()->sortBy('id', SORT_REGULAR, true)
             ->take(1);
@@ -1234,7 +1234,7 @@ class DepotPriceController extends Controller
             ->take(1);
 
         $oryxeld = $depotprices
-            ->where('name', 'Oryx Energies Kenya')
+            ->where('name', 'Oryx Energies ')
             ->where('location', 'Eldoret')
             ->unique()->sortBy('id', SORT_REGULAR, true)
             ->take(1);
@@ -1246,7 +1246,7 @@ class DepotPriceController extends Controller
             ->take(1);
 
         $galanaeld = $depotprices
-            ->where('name', 'Galana Oil kenya')
+            ->where('name', 'Galana Oil')
             ->where('location', 'Eldoret')
             ->unique()->sortBy('id', SORT_REGULAR, true)
             ->take(1);
@@ -1288,7 +1288,7 @@ class DepotPriceController extends Controller
             ->take(1);
 
         $kencoreld = $depotprices
-            ->where('name', 'KENCOR Petroleum')
+            ->where('name', 'Kencor Petroleum')
             ->where('location', 'Eldoret')
             ->unique()->sortBy('id', SORT_REGULAR, true)
             ->take(1);
@@ -1306,7 +1306,7 @@ class DepotPriceController extends Controller
             ->take(1);
 
         $ainueld = $depotprices
-            ->where('name', 'Ainu Shamsi Energy')
+            ->where('name', 'Ainu Shamsi')
             ->where('location', 'Eldoret')
             ->unique()->sortBy('id', SORT_REGULAR, true)
             ->take(1);
@@ -1318,7 +1318,7 @@ class DepotPriceController extends Controller
             ->take(1);
 
         $olympiceld = $depotprices
-            ->where('name', 'OLYMPIC Petroleum')
+            ->where('name', 'Olympic Petroleum')
             ->where('location', 'Eldoret')
             ->unique()->sortBy('id', SORT_REGULAR, true)
             ->take(1);
@@ -1372,7 +1372,7 @@ class DepotPriceController extends Controller
             ->take(1);
 
         $braineld = $depotprices
-            ->where('name', 'Brain Field Oil')
+            ->where('name', 'Brain Field')
             ->where('location', 'Eldoret')
             ->unique()->sortBy('id', SORT_REGULAR, true)
             ->take(1);

@@ -15,12 +15,12 @@ class AuditController extends Controller
     {
         $auditTrail = DB::table('audits')
             ->select(
-                'audits.id', 
-                'audits.user_type', 
-                'audits.user_id', 
-                'audits.event', 
+                'audits.id',
+                'audits.user_type',
+                'audits.user_id',
+                'audits.event',
                 'audits.auditable_type',
-                'audits.auditable_id', 
+                'audits.auditable_id',
                 'audits.old_values',
                 'audits.new_values',
                 // 'audits.url',
@@ -30,6 +30,26 @@ class AuditController extends Controller
             )
             ->get();
         return response($auditTrail, 200);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $results = DB::select('select * from audits where id = :id', ['id' => $id]);
+
+        if ($results) {
+            $auditItem = $results;
+            return response($auditItem, 200);
+        } else {
+            return response()->json([
+                "message" => "audit item not found",
+            ], 404);
+        }
     }
 
 }
