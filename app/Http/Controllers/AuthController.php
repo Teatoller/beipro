@@ -11,6 +11,16 @@ use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
+    // /**
+    //  * Register a new user.
+    //  *
+    //  * @return void
+    //  */
+    // public function __construct()
+    // {
+    //     $this->middleware(['auth', 'verified']);
+    // }
+
     /**
      * Register a new user.
      *@param  \Illuminate\Http\Request  $request
@@ -34,8 +44,9 @@ class AuthController extends Controller
         $user->save();
 
         $user->notify(new RegisterActivate($user));
+
         return response()->json([
-            'message' => 'Successfully created user!',
+            'message' => 'An email with the confirmation link is sent to your email to complete your activation process.',
         ], 201);
     }
 
