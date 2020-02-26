@@ -2,15 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Storage;
 use Laravel\Passport\HasApiTokens;
 use OwenIt\Auditing\Contracts\Auditable;
 
-class User extends Authenticatable implements MustVerifyEmail, Auditable
+class User extends Authenticatable implements Auditable
 {
     use \OwenIt\Auditing\Auditable;
     use Notifiable, HasApiTokens, SoftDeletes;
@@ -31,7 +29,6 @@ class User extends Authenticatable implements MustVerifyEmail, Auditable
         'lastname',
         'email',
         'password',
-        'avatar',
         'active',
         'activation_token',
     ];
@@ -53,11 +50,5 @@ class User extends Authenticatable implements MustVerifyEmail, Auditable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    protected $appends = ['avatar_url'];
-    public function getAvatarUrlAttribute()
-    {
-        return Storage::url('avatars/'.$this->id.'/'.$this->avatar);
-    }
 
 }
