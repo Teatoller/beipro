@@ -66,7 +66,7 @@ class DepotPriceController extends Controller
             ->take(1);
 
         $oryxnrb = $depotprices
-            ->where('name', 'Oryx Energies ')
+            ->where('name', 'Oryx Energies')
             ->where('location', 'Nairobi')
             ->unique()->sortBy('id', SORT_REGULAR, true)
             ->take(1);
@@ -358,7 +358,7 @@ class DepotPriceController extends Controller
             ->take(1);
 
         $oryxmsa = $depotprices
-            ->where('name', 'Oryx Energies ')
+            ->where('name', 'Oryx Energies')
             ->where('location', 'Mombasa')
             ->unique()->sortBy('id', SORT_REGULAR, true)
             ->take(1);
@@ -650,7 +650,7 @@ class DepotPriceController extends Controller
             ->take(1);
 
         $oryxnkr = $depotprices
-            ->where('name', 'Oryx Energies ')
+            ->where('name', 'Oryx Energies')
             ->where('location', 'Nakuru')
             ->unique()->sortBy('id', SORT_REGULAR, true)
             ->take(1);
@@ -942,7 +942,7 @@ class DepotPriceController extends Controller
             ->take(1);
 
         $oryxksm = $depotprices
-            ->where('name', 'Oryx Energies ')
+            ->where('name', 'Oryx Energies')
             ->where('location', 'Kisumu')
             ->unique()->sortBy('id', SORT_REGULAR, true)
             ->take(1);
@@ -1234,7 +1234,7 @@ class DepotPriceController extends Controller
             ->take(1);
 
         $oryxeld = $depotprices
-            ->where('name', 'Oryx Energies ')
+            ->where('name', 'Oryx Energies')
             ->where('location', 'Eldoret')
             ->unique()->sortBy('id', SORT_REGULAR, true)
             ->take(1);
