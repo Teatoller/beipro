@@ -19,7 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 // Route::resource('user', 'Auth\UserController');
 
-Auth::routes(['verify' => true]);
+// Auth::routes(['verify' => true]);
 
 Route::group([
     'prefix' => 'auth'
