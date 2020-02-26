@@ -11,16 +11,6 @@ use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
-    // /**
-    //  * Register a new user.
-    //  *
-    //  * @return void
-    //  */
-    // public function __construct()
-    // {
-    //     $this->middleware(['auth', 'verified']);
-    // }
-
     /**
      * Register a new user.
      *@param  \Illuminate\Http\Request  $request
