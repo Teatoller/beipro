@@ -29,10 +29,10 @@ class AdminController extends Controller
         $request->validate([
             'company_id' => 'required',
             'staff_id' => 'required|string',
-            'firstname' => 'required|string',
-            'lastname' => 'required|string',
+            'firstname' => 'required|alpha|string',
+            'lastname' => 'required|alpha|string',
             'email' => 'required|string|email',
-            'role' => 'required|string',
+            'role' => 'required|string|max:5',
         ]);
 
         $company_id = $request->company_id;
@@ -90,10 +90,10 @@ class AdminController extends Controller
         $request->validate([
             'company_id' => 'required',
             'staff_id' => 'required|string',
-            'firstname' => 'required|string',
-            'lastname' => 'required|string',
+            'firstname' => 'required|alpha|string',
+            'lastname' => 'required|alpha|string',
             'email' => 'required|string|email',
-            'role' => 'required|string',
+            'role' => 'required|string|max:5',
         ]);
 
         if (Admin::where('id', $id)->exists()) {

@@ -28,12 +28,12 @@ class CurrentPriceController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'diesel' => 'nullable|between:0, 9999.99',
-            'petrol' => 'nullable|between:0, 9999.99',
-            'kerosene' => 'nullable|between:0, 9999.99',
-            'ido' => 'nullable|between:0, 9999.99',
-            'fo' => 'nullable|between:0, 9999.99',
-            'lpg' => 'nullable|between:0, 9999.99',
+            'diesel' => 'nullable|numeric|between:0, 9999.99',
+            'petrol' => 'nullable|numeric|between:0, 9999.99',
+            'kerosene' => 'nullable|numeric|between:0, 9999.99',
+            'ido' => 'nullable|numeric|between:0, 9999.99',
+            'fo' => 'nullable|numeric|between:0, 9999.99',
+            'lpg' => 'nullable|numeric|between:0, 9999.99',
         ]);
 
         $currentprice = new CurrentPrice([
@@ -84,12 +84,12 @@ class CurrentPriceController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'diesel' => 'nullable|between:0, 9999.99',
-            'petrol' => 'nullable|between:0, 9999.99',
-            'kerosene' => 'nullable|between:0, 9999.99',
-            'ido' => 'nullable|between:0, 9999.99',
-            'fo' => 'nullable|between:0, 9999.99',
-            'lpg' => 'nullable|between:0, 9999.99',
+            'diesel' => 'nullable|numeric|between:0, 9999.99',
+            'petrol' => 'nullable|numeric|between:0, 9999.99',
+            'kerosene' => 'nullable|numeric|between:0, 9999.99',
+            'ido' => 'nullable|numeric|between:0, 9999.99',
+            'fo' => 'nullable|numeric|between:0, 9999.99',
+            'lpg' => 'nullable|numeric|between:0, 9999.99',
         ]);
 
         if (CurrentPrice::where('id', $id)->exists()) {

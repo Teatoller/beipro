@@ -28,8 +28,8 @@ class SuperAdminController extends Controller
     {
         $request->validate([
             'staff_id' => 'required|string',
-            'firstname' => 'required|string',
-            'lastname' => 'required|string',
+            'firstname' => 'required|alpha|string',
+            'lastname' => 'required|alpha|string',
             'email' => 'required|string|email',
             'role' => 'required|string',
         ]);
