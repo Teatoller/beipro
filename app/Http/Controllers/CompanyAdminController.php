@@ -27,12 +27,12 @@ class CompanyAdminController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'front_office_id' => 'required',
-            'firstname' => 'required|string',
-            'lastname' => 'required|string',
+            'front_office_id' => 'required|numeric',
+            'firstname' => 'required|alpha|string',
+            'lastname' => 'required|alpha|string',
             'staff_id' => 'required|string',
             'email' => 'required|string|email',
-            'role' => 'required|string',
+            'role' => 'required|string|max:5',
             'location_code' => 'required|string',
         ]);
 
@@ -92,12 +92,12 @@ class CompanyAdminController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'front_office_id' => 'required',
-            'firstname' => 'required|string',
-            'lastname' => 'required|string',
+            'front_office_id' => 'required|numeric',
+            'firstname' => 'required|alpha|string',
+            'lastname' => 'required|alpha|string',
             'staff_id' => 'required|string',
             'email' => 'required|string|email',
-            'role' => 'required|string',
+            'role' => 'required|string|max:5',
             'location_code' => 'required|string',
         ]);
 
