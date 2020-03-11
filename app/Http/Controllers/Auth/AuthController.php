@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
+// use Intervention\Image\ImageManagerStatic as Image;
+
 class AuthController extends Controller
 {
     /**
@@ -109,6 +111,45 @@ class AuthController extends Controller
     public function profile(Request $request)
     {
         return response()->json($request->user());
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function update_avatar(Request $request)
+    {
+
+        $request->validate([
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $user = $request->user();
+
+        if ($request->hasFile('avatar')) {
+            // Get filename with the extension
+            $filenameWithExt = $request->file('avatar')->getClientOriginalName();
+            // Get just filename
+            $filename = $user->id . "_$filenameWithExt";
+            // Get just ext
+            $extension = $request->file('avatar')->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore = $filename . time() . '.' . $extension;
+            // Upload avatar
+            $request->file('avatar')->storeAs('avatars', $fileNameToStore);
+        } else {
+            $fileNameToStore = 'noavatar.jpg';
+        }
+
+        $user->avatar = $fileNameToStore;
+        $user->save();
+
+        return response()->json([
+            'message' => "'Success','You have successfully upload avatar.",
+        ], 200);
+
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -31,6 +32,7 @@ class User extends Authenticatable implements Auditable
         'password',
         'active',
         'activation_token',
+        'avatar',
     ];
 
     /**
@@ -50,5 +52,17 @@ class User extends Authenticatable implements Auditable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $appends = ['avatar_url'];
+    public function getAvatarUrlAttribute()
+    {
+        // return Storage::url('avatars/'.$this->id.'/'.$this->avatar);
+        return Storage::url('avatars/'.$this->avatar);
+    }
 
 }
