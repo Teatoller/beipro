@@ -8,6 +8,9 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use JD\Cloudder\Facades\Cloudder;
+
+// use Intervention\Image\ImageManagerStatic as Image;
 
 class AuthController extends Controller
 {
@@ -109,6 +112,50 @@ class AuthController extends Controller
     public function profile(Request $request)
     {
         return response()->json($request->user());
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function update_avatar(Request $request)
+    {
+        $this->validate($request, [
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $user = $request->user();
+
+        if ($request->hasFile('avatar')) {
+            $image = $request->file('avatar');
+
+            $name = $request->file('avatar')->getClientOriginalName();
+
+            $avatar = $request->file('avatar')->getRealPath();
+
+            Cloudder::upload($avatar, null);
+
+            list($width, $height) = getimagesize($avatar);
+
+            $avatar_url = Cloudder::show(Cloudder::getPublicId(), ["width" => $width, "height" => $height]);
+
+        } else {
+            $avatar_url = 'noavatar.jpg';
+        }
+
+        //save images url
+        $user->avatar_url = $avatar_url;
+        $user->save();
+
+        //save to uploads directory
+        $image->move(public_path("avatars"), $name);
+
+        return response()->json([
+            'message' => "'Success','You have successfully upload avatar.",
+        ], 200);
+
     }
 
     /**
