@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use JD\Cloudder\Facades\Cloudder;
 
 // use Intervention\Image\ImageManagerStatic as Image;
 
@@ -121,30 +122,35 @@ class AuthController extends Controller
      */
     public function update_avatar(Request $request)
     {
-
-        $request->validate([
+        $this->validate($request, [
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $user = $request->user();
 
         if ($request->hasFile('avatar')) {
-            // Get filename with the extension
-            $filenameWithExt = $request->file('avatar')->getClientOriginalName();
-            // Get just filename
-            $filename = $user->id . "_$filenameWithExt";
-            // Get just ext
-            $extension = $request->file('avatar')->getClientOriginalExtension();
-            // Filename to store
-            $fileNameToStore = $filename . time() . '.' . $extension;
-            // Upload avatar
-            $request->file('avatar')->storeAs('avatars', $fileNameToStore);
+            $image = $request->file('avatar');
+
+            $name = $request->file('avatar')->getClientOriginalName();
+
+            $avatar = $request->file('avatar')->getRealPath();
+
+            Cloudder::upload($avatar, null);
+
+            list($width, $height) = getimagesize($avatar);
+
+            $avatar_url = Cloudder::show(Cloudder::getPublicId(), ["width" => $width, "height" => $height]);
+
         } else {
-            $fileNameToStore = 'noavatar.jpg';
+            $avatar_url = 'noavatar.jpg';
         }
 
-        $user->avatar = $fileNameToStore;
+        //save images url
+        $user->avatar_url = $avatar_url;
         $user->save();
+
+        //save to uploads directory
+        $image->move(public_path("avatars"), $name);
 
         return response()->json([
             'message' => "'Success','You have successfully upload avatar.",
