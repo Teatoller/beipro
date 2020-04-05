@@ -7,8 +7,10 @@ use App\Notifications\RegisterActivate;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+// use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use JD\Cloudder\Facades\Cloudder;
+// use Laravolt\Avatar\Facade as Avatar;
 
 // use Intervention\Image\ImageManagerStatic as Image;
 
@@ -35,6 +37,11 @@ class AuthController extends Controller
             'activation_token' => str::random(60),
         ]);
         $user->save();
+
+        // $avatar = Avatar::create($user->firstname)->getImageObject()->encode('png');
+        // $ava = Storage::put('avatars/' . $user->id . '/avatar.png', (string) $avatar);
+        // $user->avatar = $ava;
+        // $user->save;
 
         $user->notify(new RegisterActivate($user));
 
@@ -112,6 +119,40 @@ class AuthController extends Controller
     public function profile(Request $request)
     {
         return response()->json($request->user());
+    }
+
+    /**
+     * Update profile name the specified resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function update_name(Request $request)
+    {
+        $request->validate([
+            'firstname' => 'required|string|max:55',
+            'lastname' => 'required|string|max:55',
+        ]);
+
+        $user = $request->user();
+
+        if ($user) {
+            $firstname = $request->firstname;
+            $lastname = $request->lastname;
+
+            $user->firstname = is_null($firstname) ? $user->firstname : $firstname;
+            $user->lastname = is_null($lastname) ? $user->lastname : $lastname;
+
+            $user->save();
+
+            return response()->json([
+                "message" => "records updated successfully",
+            ], 200);
+        } else {
+            return response()->json([
+                "message" => "user not found",
+            ], 404);
+        }
     }
 
     /**
