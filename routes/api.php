@@ -30,6 +30,7 @@ Route::group([
         Route::get('logout', 'AuthController@logout');
         Route::get('profile', 'AuthController@profile');
         Route::post('profile', 'AuthController@update_avatar');
+        Route::patch('profile', 'AuthController@update_name');
     });
 });
 
