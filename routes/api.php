@@ -57,3 +57,6 @@ Route::get('frontadmins', 'AdminFrontofficeCombineController@index');
 Route::get('combineadmins', 'CombineCompanyAdminController@index');
 Route::get('audits', 'AuditController@index');
 Route::get('audits/{token}', 'AuditController@show');
+
+Route::get('contact-us', 'ContactUsController@getContact');
+Route::post('contact-us', 'ContactUsController@saveContact');
