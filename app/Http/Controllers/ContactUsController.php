@@ -3,25 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\ContactUs;
+use App\Mail\ContactFormMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class ContactUsController extends Controller
 {
-    public function getContact()
+    public function index()
     {
         $contacts = ContactUs::all();
         return response($contacts, 200);
     }
 
-    public function saveContact(Request $request)
+    public function store(Request $request)
     {
 
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email',
-            'subject' => 'required',
-            'phone_number' => 'required',
+            'subject' => 'nullable',
+            'phone_number' => 'nullable',
             'message' => 'required',
         ]);
 
@@ -35,21 +36,52 @@ class ContactUsController extends Controller
 
         $contact->save();
 
-        // Mail::send('contact',
-        //     array(
-        //         'name' => $request->get('name'),
-        //         'email' => $request->get('email'),
-        //         'subject' => $request->get('subject'),
-        //         'phone_number' => $request->get('phone_number'),
-        //         'message' => $request->get('message'),
-        //     ), function ($message) use ($request) {
-        //         $message->from($request->email);
-        //         $message->to('beipro002@gmail.com');
-        //     });
+        Mail::to('beipro002@gmail.com')->send(new ContactFormMail($contact));
 
         return response()->json([
             "message" => "Thank you for contacting us!",
         ], 200);
 
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        if (ContactUs::where('id', $id)->exists()) {
+            $contact = ContactUs::where('id', $id)->get();
+            return response($contact, 200);
+        } else {
+            return response()->json([
+                "message" => "Feedback not found",
+            ], 404);
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        if (ContactUs::where('id', $id)->exists()) {
+            $contact = ContactUs::find($id);
+            $contact->delete();
+            return response()->json([
+                "message" => "Feedback deleted",
+            ], 202);
+        } else {
+            return response()->json([
+                "message" => "Feedback not found",
+            ], 404);
+        }
+
+    }
+
 }
