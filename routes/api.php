@@ -58,5 +58,7 @@ Route::get('combineadmins', 'CombineCompanyAdminController@index');
 Route::get('audits', 'AuditController@index');
 Route::get('audits/{token}', 'AuditController@show');
 
-Route::get('contact-us', 'ContactUsController@getContact');
-Route::post('contact-us', 'ContactUsController@saveContact');
+Route::get('contact-us', 'ContactUsController@index');
+Route::post('contact-us', 'ContactUsController@store');
+Route::get('contact-us/{id}', 'ContactUsController@show');
+Route::delete('contact-us/{id}', 'ContactUsController@destroy');
