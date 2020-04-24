@@ -12,12 +12,20 @@ return [
     |
     */
 
-    'supportsCredentials' => false,
-    'allowedOrigins' => ['*'],
-    'allowedOriginsPatterns' => [],
-    'allowedHeaders' => ['*'],
-    'allowedMethods' => ['*'],
-    'exposedHeaders' => ['Authorization'],
-    'maxAge' => 0,
+    'paths' => ['api/*'],
+
+    'allowed_methods' => ['*'],
+
+    'allowed_origins' => ['*'],
+
+    'allowed_origins_patterns' => [],
+
+    'allowed_headers' => ['*'],
+
+    'exposed_headers' => ['Authorization'],
+
+    'max_age' => 0,
+
+    'supports_credentials' => false,
 
 ];
