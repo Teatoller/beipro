@@ -17,7 +17,7 @@ class DepotPriceController extends Controller
         $depotprices = DB::table('companies')
             ->join('front_offices', 'front_offices.company_id', '=', 'companies.id')
             ->join('current_prices', 'current_prices.front_office_id', '=', 'front_offices.id')
-            ->select('companies.name', 'companies.country', 'front_offices.location', 'current_prices.id', 'current_prices.diesel', 'current_prices.petrol', 'current_prices.kerosene', 'current_prices.ido', 'current_prices.fo', 'current_prices.lpg')
+            ->select('companies.name', 'companies.country', 'companies.logo', 'front_offices.location', 'current_prices.id', 'current_prices.diesel', 'current_prices.petrol', 'current_prices.kerosene', 'current_prices.ido', 'current_prices.fo', 'current_prices.lpg')
             ->get();
 
         /**
