@@ -26,7 +26,8 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $data = $request->validate([
+            'logo'=> 'nullable|string',
             'name' => 'required|string',
             'description' => 'required|string',
             'location' => 'required|string',
@@ -34,22 +35,23 @@ class CompanyController extends Controller
             'established' => 'required|string',
         ]);
 
-        $name = $request->name;
-        $logo = $request->logo;
-        $description = $request->description;
-        $location = $request->location;
-        $country = $request->country;
-        $established = $request->established;
+        // $name = $request->name;
+        // $logo = $request->logo;
+        // $description = $request->description;
+        // $location = $request->location;
+        // $country = $request->country;
+        // $established = $request->established;
 
-        $company = new Company();
-        $company->name = $name;
-        $company->logo = $logo;
-        $company->description = $description;
-        $company->location = $location;
-        $company->country = $country;
-        $company->established = $established;
+        // $company = new Company();
+        // $company->name = $name;
+        // $company->logo = $logo;
+        // $company->description = $description;
+        // $company->location = $location;
+        // $company->country = $country;
+        // $company->established = $established;
 
-        $company->save();
+        // $company->save();
+        Company::create($data);
 
         return response()->json([
             "message" => "Company created succesfully",
