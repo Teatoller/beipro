@@ -26,26 +26,14 @@ class FrontOfficeController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $data = $request->validate([
             'company_id' => 'required',
             'name' => 'required|string',
             'code' => 'required|string',
             'location' => 'required|string',
         ]);
 
-        $name = $request->name;
-        $code = $request->code;
-        $location = $request->location;
-
-        $frontoffice = new FrontOffice;
-        $frontoffice->name = $name;
-        $frontoffice->code = $code;
-        $frontoffice->location = $location;
-
-        $company_id = $request->input('company_id');
-        $frontoffice->company_id = $company_id;
-
-        $frontoffice->save();
+        FrontOffice::create($data);
 
         return response()->json([
             "message" => "Front Office record created succesfully",
@@ -79,7 +67,7 @@ class FrontOfficeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
+        $data = $request->validate([
             'company_id' => 'required',
             'name' => 'required|string',
             'code' => 'required|string',

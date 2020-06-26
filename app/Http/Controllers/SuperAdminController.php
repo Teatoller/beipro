@@ -26,7 +26,7 @@ class SuperAdminController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $data = $request->validate([
             'staff_id' => 'required|string',
             'firstname' => 'required|alpha|string',
             'lastname' => 'required|alpha|string',
@@ -34,20 +34,21 @@ class SuperAdminController extends Controller
             'role' => 'required|string',
         ]);
 
-        $staff_id = $request->staff_id;
-        $firstname = $request->firstname;
-        $lastname = $request->lastname;
-        $email = $request->email;
-        $role = $request->role;
+        // $staff_id = $request->staff_id;
+        // $firstname = $request->firstname;
+        // $lastname = $request->lastname;
+        // $email = $request->email;
+        // $role = $request->role;
 
-        $sAdmins = new SuperAdmin;
-        $sAdmins->staff_id = $staff_id;
-        $sAdmins->firstname = $firstname;
-        $sAdmins->lastname = $lastname;
-        $sAdmins->email = $email;
-        $sAdmins->role = $role;
+        // $sAdmins = new SuperAdmin;
+        // $sAdmins->staff_id = $staff_id;
+        // $sAdmins->firstname = $firstname;
+        // $sAdmins->lastname = $lastname;
+        // $sAdmins->email = $email;
+        // $sAdmins->role = $role;
 
-        $sAdmins->save();
+        // $sAdmins->save();
+        SuperAdmin::create($data);
 
         return response()->json([
             "message" => "Super Admin created succesfully",

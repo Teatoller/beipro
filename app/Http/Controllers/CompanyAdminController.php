@@ -26,7 +26,8 @@ class CompanyAdminController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $data = $request->validate([
+            'admin_id' => 'required|numeric',
             'front_office_id' => 'required|numeric',
             'firstname' => 'required|alpha|string',
             'lastname' => 'required|alpha|string',
@@ -36,28 +37,7 @@ class CompanyAdminController extends Controller
             'location_code' => 'required|string',
         ]);
 
-        $firstname = $request->firstname;
-        $lastname = $request->lastname;
-        $staff_id = $request->staff_id;
-        $email = $request->email;
-        $role = $request->role;
-        $location_code = $request->location_code;
-
-        $companyadmin = new CompanyAdmin;
-        $companyadmin->firstname = $firstname;
-        $companyadmin->lastname = $lastname;
-        $companyadmin->staff_id = $staff_id;
-        $companyadmin->email = $email;
-        $companyadmin->role = $role;
-
-        $companyadmin->location_code = $location_code;
-
-        $admin_id = $request->input('admin_id');
-        $front_office_id = $request->input('front_office_id');
-        $companyadmin->admin_id = $admin_id;
-        $companyadmin->front_office_id = $front_office_id;
-
-        $companyadmin->save();
+        CompanyAdmin::create($data);
 
         return response()->json([
             "message" => "Company Admin created succesfully",
@@ -91,7 +71,7 @@ class CompanyAdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
+        $data = $request->validate([
             'front_office_id' => 'required|numeric',
             'firstname' => 'required|alpha|string',
             'lastname' => 'required|alpha|string',
