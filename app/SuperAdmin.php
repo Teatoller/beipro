@@ -10,6 +10,7 @@ class SuperAdmin extends Model implements Auditable
     use \OwenIt\Auditing\Auditable;
 
     protected $fillable = [
+        'staff_id',
         'firstname',
         'lastname',
         'email',

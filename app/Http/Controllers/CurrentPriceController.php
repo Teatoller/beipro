@@ -27,7 +27,8 @@ class CurrentPriceController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $data = $request->validate([
+            'front_office_id' => 'required|numeric',
             'diesel' => 'nullable|numeric|between:0, 9999.99',
             'petrol' => 'nullable|numeric|between:0, 9999.99',
             'kerosene' => 'nullable|numeric|between:0, 9999.99',
@@ -36,19 +37,7 @@ class CurrentPriceController extends Controller
             'lpg' => 'nullable|numeric|between:0, 9999.99',
         ]);
 
-        $currentprice = new CurrentPrice([
-            'diesel' => $request->get('diesel'),
-            'petrol' => $request->get('petrol'),
-            'kerosene' => $request->get('kerosene'),
-            'ido' => $request->get('ido'),
-            'fo' => $request->get('fo'),
-            'lpg' => $request->get('lpg'),
-        ]);
-
-        $front_office_id = $request->input('front_office_id');
-        $currentprice->front_office_id = $front_office_id;
-
-        $currentprice->save();
+        CurrentPrice::create($data);
 
         return response()->json([
             "Success" => "Price has been added",

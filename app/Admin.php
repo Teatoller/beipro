@@ -14,6 +14,7 @@ class Admin extends Model implements Auditable
         'firstname',
         'lastname',
         'email',
+        'staff_id',
         'role',
     ];
 

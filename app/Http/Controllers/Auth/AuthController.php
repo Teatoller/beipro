@@ -68,7 +68,7 @@ class AuthController extends Controller
         $user->activation_token = '';
         $user->save();
 
-        return redirect()->away('https://beipro-frontend.herokuapp.com/');
+        return redirect()->away('https://beipro-frontend.herokuapp.com/login');
     }
 
     /**

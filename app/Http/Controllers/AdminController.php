@@ -26,7 +26,7 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $data = $request->validate([
             'company_id' => 'required',
             'staff_id' => 'required|string',
             'firstname' => 'required|alpha|string',
@@ -35,25 +35,7 @@ class AdminController extends Controller
             'role' => 'required|string|max:5',
         ]);
 
-        $company_id = $request->company_id;
-        $staff_id = $request->staff_id;
-        $firstname = $request->firstname;
-        $lastname = $request->lastname;
-        $email = $request->email;
-        $role = $request->role;
-
-        $admin = new Admin;
-        $admin->company_id = $company_id;
-        $admin->staff_id = $staff_id;
-        $admin->firstname = $firstname;
-        $admin->lastname = $lastname;
-        $admin->email = $email;
-        $admin->role = $role;
-
-        $company_id = $request->input('company_id');
-        $admin->company_id = $company_id;
-
-        $admin->save();
+        Admin::create($data);
 
         return response()->json([
             "message" => "Admin created succesfully",
