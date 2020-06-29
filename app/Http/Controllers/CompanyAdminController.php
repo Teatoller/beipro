@@ -26,16 +26,7 @@ class CompanyAdminController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'admin_id' => 'required|numeric',
-            'front_office_id' => 'required|numeric',
-            'firstname' => 'required|alpha|string',
-            'lastname' => 'required|alpha|string',
-            'staff_id' => 'required|string',
-            'email' => 'required|string|email',
-            'role' => 'required|string|max:5',
-            'location_code' => 'required|string',
-        ]);
+        $data = $this->validateRequest();
 
         CompanyAdmin::create($data);
 
@@ -71,15 +62,7 @@ class CompanyAdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->validate([
-            'front_office_id' => 'required|numeric',
-            'firstname' => 'required|alpha|string',
-            'lastname' => 'required|alpha|string',
-            'staff_id' => 'required|string',
-            'email' => 'required|string|email',
-            'role' => 'required|string|max:5',
-            'location_code' => 'required|string',
-        ]);
+        $data = $this->validateRequest();
 
         if (CompanyAdmin::where('id', $id)->exists()) {
             $admin_id = $request->admin_id;
@@ -101,7 +84,7 @@ class CompanyAdminController extends Controller
             $companyadmin->role = is_null($role) ? $companyadmin->role : $role;
             $companyadmin->location_code = is_null($location_code) ? $companyadmin->location_code : $location_code;
 
-            $companyadmin->save();
+            $companyadmin->update($data);
 
             return response()->json([
                 "message" => "records updated successfully",
@@ -133,5 +116,19 @@ class CompanyAdminController extends Controller
             ], 404);
         }
 
+    }
+
+    public function validateRequest()
+    {
+        return request()->validate([
+            'admin_id' => 'required|numeric',
+            'front_office_id' => 'required|numeric',
+            'firstname' => 'required|alpha|string',
+            'lastname' => 'required|alpha|string',
+            'staff_id' => 'required|string',
+            'email' => 'required|string|email',
+            'role' => 'required|string|max:5',
+            'location_code' => 'required|string',
+        ]);
     }
 }
