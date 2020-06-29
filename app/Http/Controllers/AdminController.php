@@ -26,14 +26,7 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'company_id' => 'required',
-            'staff_id' => 'required|string',
-            'firstname' => 'required|alpha|string',
-            'lastname' => 'required|alpha|string',
-            'email' => 'required|string|email',
-            'role' => 'required|string|max:5',
-        ]);
+        $data = $this->validateRequest();
 
         Admin::create($data);
 
@@ -69,14 +62,7 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'company_id' => 'required',
-            'staff_id' => 'required|string',
-            'firstname' => 'required|alpha|string',
-            'lastname' => 'required|alpha|string',
-            'email' => 'required|string|email',
-            'role' => 'required|string|max:5',
-        ]);
+        $data = $this->validateRequest();
 
         if (Admin::where('id', $id)->exists()) {
             $company_id = $request->company_id;
@@ -94,7 +80,7 @@ class AdminController extends Controller
             $admin->email = is_null($email) ? $admin->email : $email;
             $admin->role = is_null($role) ? $admin->role : $role;
 
-            $admin->save();
+            $admin->update($data);
 
             return response()->json([
                 "message" => "records updated successfully",
@@ -126,5 +112,17 @@ class AdminController extends Controller
                 "message" => "Admin not found",
             ], 404);
         }
+    }
+
+    public function validateRequest()
+    {
+        return request()->validate([
+            'company_id' => 'required',
+            'staff_id' => 'required|string',
+            'firstname' => 'required|alpha|string',
+            'lastname' => 'required|alpha|string',
+            'email' => 'required|string|email',
+            'role' => 'required|string|max:5',
+        ]);
     }
 }
