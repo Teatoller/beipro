@@ -26,13 +26,8 @@ class FrontOfficeController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'company_id' => 'required',
-            'name' => 'required|string',
-            'code' => 'required|string',
-            'location' => 'required|string',
-        ]);
-
+        $data = $this->validateRequest();
+        
         FrontOffice::create($data);
 
         return response()->json([
@@ -67,13 +62,8 @@ class FrontOfficeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->validate([
-            'company_id' => 'required',
-            'name' => 'required|string',
-            'code' => 'required|string',
-            'location' => 'required|string',
-        ]);
-
+        $data = $this->validateRequest();
+        
         if (FrontOffice::where('id', $id)->exists()) {
             $name = $request->name;
             $code = $request->code;
@@ -84,7 +74,7 @@ class FrontOfficeController extends Controller
             $frontoffice->code = is_null($code) ? $frontoffice->code : $code;
             $frontoffice->location = is_null($location) ? $frontoffice->location : $location;
 
-            $frontoffice->save();
+            $frontoffice->update($data);
 
             return response()->json([
                 "message" => "records updated successfully",
@@ -115,5 +105,15 @@ class FrontOfficeController extends Controller
                 "message" => "frontoffice not found",
             ], 404);
         }
+    }
+
+    public function validateRequest()
+    {
+        return request()->validate([
+            'company_id' => 'required',
+            'name' => 'required|string',
+            'code' => 'required|string',
+            'location' => 'required|string',
+        ]);
     }
 }

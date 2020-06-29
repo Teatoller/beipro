@@ -27,15 +27,16 @@ class CurrentPriceController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'front_office_id' => 'required|numeric',
-            'diesel' => 'nullable|numeric|between:0, 9999.99',
-            'petrol' => 'nullable|numeric|between:0, 9999.99',
-            'kerosene' => 'nullable|numeric|between:0, 9999.99',
-            'ido' => 'nullable|numeric|between:0, 9999.99',
-            'fo' => 'nullable|numeric|between:0, 9999.99',
-            'lpg' => 'nullable|numeric|between:0, 9999.99',
-        ]);
+        $data = $this->validateRequest();
+        // $data = $request->validate([
+        //     'front_office_id' => 'required|numeric',
+        //     'diesel' => 'nullable|numeric|between:0, 9999.99',
+        //     'petrol' => 'nullable|numeric|between:0, 9999.99',
+        //     'kerosene' => 'nullable|numeric|between:0, 9999.99',
+        //     'ido' => 'nullable|numeric|between:0, 9999.99',
+        //     'fo' => 'nullable|numeric|between:0, 9999.99',
+        //     'lpg' => 'nullable|numeric|between:0, 9999.99',
+        // ]);
 
         CurrentPrice::create($data);
 
@@ -72,25 +73,13 @@ class CurrentPriceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'diesel' => 'nullable|numeric|between:0, 9999.99',
-            'petrol' => 'nullable|numeric|between:0, 9999.99',
-            'kerosene' => 'nullable|numeric|between:0, 9999.99',
-            'ido' => 'nullable|numeric|between:0, 9999.99',
-            'fo' => 'nullable|numeric|between:0, 9999.99',
-            'lpg' => 'nullable|numeric|between:0, 9999.99',
-        ]);
+        $data = $this->validateRequest();
 
         if (CurrentPrice::where('id', $id)->exists()) {
             $currentprice = CurrentPrice::find($id);
-            $currentprice->diesel = $request->get('diesel');
-            $currentprice->petrol = $request->get('petrol');
-            $currentprice->kerosene = $request->get('kerosene');
-            $currentprice->ido = $request->get('ido');
-            $currentprice->fo = $request->get('fo');
-            $currentprice->lpg = $request->get('lpg');
+            
+            $currentprice->update($data);
 
-            $currentprice->save();
             return response()->json([
                 "message" => "records updated successfully",
             ], 200);
@@ -121,5 +110,19 @@ class CurrentPriceController extends Controller
                 "message" => "currentprice not found",
             ], 404);
         }
+    }
+
+    public function validateRequest()
+    {
+        return request()->validate([
+            'front_office_id' => 'required|numeric',
+            'diesel' => 'nullable|numeric|between:0, 9999.99',
+            'petrol' => 'nullable|numeric|between:0, 9999.99',
+            'kerosene' => 'nullable|numeric|between:0, 9999.99',
+            'ido' => 'nullable|numeric|between:0, 9999.99',
+            'fo' => 'nullable|numeric|between:0, 9999.99',
+            'lpg' => 'nullable|numeric|between:0, 9999.99',
+        ]);
+
     }
 }

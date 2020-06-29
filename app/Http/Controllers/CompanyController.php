@@ -26,31 +26,8 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'logo'=> 'nullable|string',
-            'name' => 'required|string',
-            'description' => 'required|string',
-            'location' => 'required|string',
-            'country' => 'required|string',
-            'established' => 'required|string',
-        ]);
+        $data = $this->validateRequest();
 
-        // $name = $request->name;
-        // $logo = $request->logo;
-        // $description = $request->description;
-        // $location = $request->location;
-        // $country = $request->country;
-        // $established = $request->established;
-
-        // $company = new Company();
-        // $company->name = $name;
-        // $company->logo = $logo;
-        // $company->description = $description;
-        // $company->location = $location;
-        // $company->country = $country;
-        // $company->established = $established;
-
-        // $company->save();
         Company::create($data);
 
         return response()->json([
@@ -85,14 +62,8 @@ class CompanyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'required|string',
-            'description' => 'required|string',
-            'location' => 'required|string',
-            'country' => 'required|string',
-            'established' => 'required|string',
-        ]);
-
+        $data = $this->validateRequest();
+        
         if (Company::where('id', $id)->exists()) {
             $name = $request->name;
             $logo = $request->logo;
@@ -109,7 +80,8 @@ class CompanyController extends Controller
             $company->country = is_null($country) ? $company->country : $country;
             $company->established = is_null($established) ? $company->established : $established;
 
-            $company->save();
+            $company->update($data);
+
             return response()->json([
                 "message" => "record updated successfully",
             ], 200);
@@ -139,5 +111,17 @@ class CompanyController extends Controller
                 "message" => "company not found",
             ], 404);
         }
+    }
+
+    public function validateRequest()
+    {
+        return request()->validate([
+            'logo'=> 'nullable|string',
+            'name' => 'required|string',
+            'description' => 'required|string',
+            'location' => 'required|string',
+            'country' => 'required|string',
+            'established' => 'required|string',
+        ]);
     }
 }

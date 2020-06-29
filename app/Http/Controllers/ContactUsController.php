@@ -18,23 +18,9 @@ class ContactUsController extends Controller
     public function store(Request $request)
     {
 
-        $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required|email',
-            'subject' => 'nullable',
-            'phone_number' => 'nullable',
-            'message' => 'required',
-        ]);
+        $data = $this->validateRequest();
 
-        $contact = new ContactUs;
-
-        $contact->name = $request->name;
-        $contact->email = $request->email;
-        $contact->subject = $request->subject;
-        $contact->phone_number = $request->phone_number;
-        $contact->message = $request->message;
-
-        $contact->save();
+        $contact = ContactUs::create($data);
 
         Mail::to('beipro002@gmail.com')->send(new ContactFormMail($contact));
 
@@ -82,6 +68,17 @@ class ContactUsController extends Controller
             ], 404);
         }
 
+    }
+
+    public function validateRequest()
+    {
+        return request()->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'subject' => 'nullable',
+            'phone_number' => 'nullable',
+            'message' => 'required',
+        ]);
     }
 
 }
