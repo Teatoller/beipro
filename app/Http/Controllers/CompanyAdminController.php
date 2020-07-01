@@ -72,7 +72,7 @@ class CompanyAdminController extends Controller
             $staff_id = $request->staff_id;
             $email = $request->email;
             $role = $request->role;
-            $location_code = $request->location_code;
+            $location = $request->location;
 
             $companyadmin = CompanyAdmin::find($id);
             $companyadmin->admin_id = is_null($admin_id) ? $companyadmin->admin_id : $admin_id;
@@ -82,7 +82,7 @@ class CompanyAdminController extends Controller
             $companyadmin->staff_id = is_null($staff_id) ? $companyadmin->staff_id : $staff_id;
             $companyadmin->email = is_null($email) ? $companyadmin->email : $email;
             $companyadmin->role = is_null($role) ? $companyadmin->role : $role;
-            $companyadmin->location_code = is_null($location_code) ? $companyadmin->location_code : $location_code;
+            $companyadmin->location = is_null($location) ? $companyadmin->location : $location;
 
             $companyadmin->update($data);
 
@@ -128,7 +128,7 @@ class CompanyAdminController extends Controller
             'staff_id' => 'required|string',
             'email' => 'required|string|email',
             'role' => 'required|string|max:5',
-            'location_code' => 'required|string',
+            'location' => 'required|string',
         ]);
     }
 }
