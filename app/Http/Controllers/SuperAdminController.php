@@ -27,7 +27,7 @@ class SuperAdminController extends Controller
     public function store(Request $request)
     {
         $data = $this->validateRequest();
-        
+
         SuperAdmin::create($data);
 
         return response()->json([
@@ -78,7 +78,7 @@ class SuperAdminController extends Controller
             $sAdmin->email = is_null($email) ? $sAdmin->email : $email;
             $sAdmin->role = is_null($role) ? $sAdmin->role : $role;
 
-            $sAdmin->update($data);;
+            $sAdmin->update($data);
 
             return response()->json([
                 "message" => "records updated successfully",

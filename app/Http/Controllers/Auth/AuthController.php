@@ -7,12 +7,8 @@ use App\Notifications\RegisterActivate;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-// use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use JD\Cloudder\Facades\Cloudder;
-// use Laravolt\Avatar\Facade as Avatar;
-
-// use Intervention\Image\ImageManagerStatic as Image;
 
 class AuthController extends Controller
 {
@@ -37,11 +33,6 @@ class AuthController extends Controller
             'activation_token' => str::random(60),
         ]);
         $user->save();
-
-        // $avatar = Avatar::create($user->firstname)->getImageObject()->encode('png');
-        // $ava = Storage::put('avatars/' . $user->id . '/avatar.png', (string) $avatar);
-        // $user->avatar = $ava;
-        // $user->save;
 
         $user->notify(new RegisterActivate($user));
 
@@ -68,7 +59,7 @@ class AuthController extends Controller
         $user->activation_token = '';
         $user->save();
 
-        return redirect()->away('https://beipro-frontend.herokuapp.com/login');
+        return redirect()->away('http://www.beipro.net/login');
     }
 
     /**
