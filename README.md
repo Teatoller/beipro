@@ -85,3 +85,4 @@ NB: When creating company **_ensure_** that they exactly match the name in the D
 - stop application ```control + c```
 
 3. To run test `vendor/bin/phpunit`
+4. Larascan test run `./vendor/bin/phpstan analyse app` you may add --level=[0-10]
