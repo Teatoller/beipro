@@ -17,7 +17,7 @@ class CompanyAdmin extends Model implements Auditable
         'staff_id',
         'email',
         'role',
-        'location_code',
+        'location',
     ];
 
     /**

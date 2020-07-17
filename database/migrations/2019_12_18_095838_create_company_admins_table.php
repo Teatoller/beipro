@@ -22,7 +22,7 @@ class CreateCompanyAdminsTable extends Migration
             $table->string('staff_id')->unique();
             $table->string('email')->unique();
             $table->string('role');
-            $table->string('location_code');
+            $table->string('location');
             $table->timestamps();
         });
     }
