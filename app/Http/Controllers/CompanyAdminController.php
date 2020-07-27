@@ -24,8 +24,9 @@ class CompanyAdminController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CompanyAdmin $companyAdmin)
     {
+        $this->authorize('create', CompanyAdmin::class);
         $data = $this->validateRequest();
 
         CompanyAdmin::create($data);
@@ -60,19 +61,20 @@ class CompanyAdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CompanyAdmin $companyAdmin, $id)
     {
+        $this->authorize('update', $companyAdmin);
         $data = $this->validateRequest();
 
         if (CompanyAdmin::where('id', $id)->exists()) {
-            $admin_id = $request->admin_id;
-            $front_office_id = $request->front_office_id;
-            $firstname = $request->firstname;
-            $lastname = $request->lastname;
-            $staff_id = $request->staff_id;
-            $email = $request->email;
-            $role = $request->role;
-            $location = $request->location;
+            $admin_id = $companyAdmin->admin_id;
+            $front_office_id = $companyAdmin->front_office_id;
+            $firstname = $companyAdmin->firstname;
+            $lastname = $companyAdmin->lastname;
+            $staff_id = $companyAdmin->staff_id;
+            $email = $companyAdmin->email;
+            $role = $companyAdmin->role;
+            $location = $companyAdmin->location;
 
             $companyadmin = CompanyAdmin::find($id);
             $companyadmin->admin_id = is_null($admin_id) ? $companyadmin->admin_id : $admin_id;
@@ -102,8 +104,10 @@ class CompanyAdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(CompanyAdmin $companyAdmin, $id)
     {
+        $this->authorize('delete', $companyAdmin);
+
         if (CompanyAdmin::where('id', $id)->exists()) {
             $companyadmin = CompanyAdmin::find($id);
             $companyadmin->delete();
