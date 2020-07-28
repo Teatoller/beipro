@@ -2,9 +2,9 @@
 
 namespace App\Policies;
 
-use App\SuperAdmin;
 use App\Admin;
 use App\Models\User;
+use App\SuperAdmin;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class AdminPolicy

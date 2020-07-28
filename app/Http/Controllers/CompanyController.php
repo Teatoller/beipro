@@ -24,7 +24,7 @@ class CompanyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Company $company)
     {
         $this->authorize('create', Company::class);
         $data = $this->validateRequest();
@@ -61,12 +61,12 @@ class CompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Company $company, $id)
+    public function update(Company $company)
     {
         $this->authorize('update', $company);
         $data = $this->validateRequest();
-        
-        if (Company::where('id', $id)->exists()) {
+
+        if ($company) {
             $name = $company->name;
             $logo = $company->logo;
             $description = $company->description;
@@ -74,7 +74,7 @@ class CompanyController extends Controller
             $country = $company->country;
             $established = $company->established;
 
-            $company = Company::find($id);
+            $company = Company::find($company->id);
             $company->name = is_null($name) ? $company->name : $name;
             $company->logo = is_null($logo) ? $company->logo : $logo;
             $company->description = is_null($description) ? $company->description : $description;
@@ -100,11 +100,11 @@ class CompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Company $company, $id)
+    public function destroy(Company $company)
     {
         $this->authorize('delete', $company);
-        if (Company::where('id', $id)->exists()) {
-            $company = Company::find($id);
+        if ($company) {
+            $company = Company::find($company->id);
             $company->delete();
             return response()->json([
                 "message" => "company deleted",
@@ -119,7 +119,7 @@ class CompanyController extends Controller
     public function validateRequest()
     {
         return request()->validate([
-            'logo'=> 'nullable|string',
+            'logo' => 'nullable|string',
             'name' => 'required|string',
             'description' => 'required|string',
             'location' => 'required|string',
