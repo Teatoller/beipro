@@ -24,8 +24,9 @@ class AdminController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Admin $admin)
     {
+        $this->authorize('create', Admin::class);
         $data = $this->validateRequest();
 
         Admin::create($data);
@@ -60,19 +61,20 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Admin $admin)
     {
+        $this->authorize('update', $admin);
         $data = $this->validateRequest();
 
-        if (Admin::where('id', $id)->exists()) {
-            $company_id = $request->company_id;
-            $firstname = $request->firstname;
-            $lastname = $request->lastname;
-            $staff_id = $request->staff_id;
-            $email = $request->email;
-            $role = $request->role;
+        if ($admin->id) {
+            $company_id = $admin->company_id;
+            $firstname = $admin->firstname;
+            $lastname = $admin->lastname;
+            $staff_id = $admin->staff_id;
+            $email = $admin->email;
+            $role = $admin->role;
 
-            $admin = Admin::find($id);
+            $admin = Admin::find($admin->id);
             $admin->company_id = is_null($company_id) ? $admin->company_id : $company_id;
             $admin->firstname = is_null($firstname) ? $admin->firstname : $firstname;
             $admin->lastname = is_null($lastname) ? $admin->lastname : $lastname;
@@ -99,10 +101,11 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Admin $admin)
     {
-        if (Admin::where('id', $id)->exists()) {
-            $admin = Admin::find($id);
+        $this->authorize('delete', $admin);
+        if ($admin->id) {
+            $admin = Admin::find($admin->id);
             $admin->delete();
             return response()->json([
                 "message" => "Admin deleted",

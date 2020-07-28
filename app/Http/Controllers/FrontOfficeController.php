@@ -26,8 +26,9 @@ class FrontOfficeController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', FrontOffice::class);
         $data = $this->validateRequest();
-        
+
         FrontOffice::create($data);
 
         return response()->json([
@@ -60,14 +61,15 @@ class FrontOfficeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(FrontOffice $frontOffice, $id)
     {
+        $this->authorize('update', $frontOffice);
         $data = $this->validateRequest();
-        
+
         if (FrontOffice::where('id', $id)->exists()) {
-            $name = $request->name;
-            $code = $request->code;
-            $location = $request->location;
+            $name = $frontOffice->name;
+            $code = $frontOffice->code;
+            $location = $frontOffice->location;
 
             $frontoffice = FrontOffice::find($id);
             $frontoffice->name = is_null($name) ? $frontoffice->name : $name;
@@ -92,8 +94,9 @@ class FrontOfficeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(FrontOffice $frontOffice, $id)
     {
+        $this->authorize('delete', $frontOffice);
         if (FrontOffice::where('id', $id)->exists()) {
             $frontoffice = FrontOffice::find($id);
             $frontoffice->delete();

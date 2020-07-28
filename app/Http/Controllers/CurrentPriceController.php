@@ -27,16 +27,8 @@ class CurrentPriceController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', CurrentPrice::class);
         $data = $this->validateRequest();
-        // $data = $request->validate([
-        //     'front_office_id' => 'required|numeric',
-        //     'diesel' => 'nullable|numeric|between:0, 9999.99',
-        //     'petrol' => 'nullable|numeric|between:0, 9999.99',
-        //     'kerosene' => 'nullable|numeric|between:0, 9999.99',
-        //     'ido' => 'nullable|numeric|between:0, 9999.99',
-        //     'fo' => 'nullable|numeric|between:0, 9999.99',
-        //     'lpg' => 'nullable|numeric|between:0, 9999.99',
-        // ]);
 
         CurrentPrice::create($data);
 
@@ -71,8 +63,9 @@ class CurrentPriceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CurrentPrice $currentPrice, $id)
     {
+        $this->authorize('update', $currentPrice);
         $data = $this->validateRequest();
 
         if (CurrentPrice::where('id', $id)->exists()) {
@@ -97,8 +90,9 @@ class CurrentPriceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(CurrentPrice $currentPrice, $id)
     {
+        $this->authorize('delete', $currentPrice);
         if (CurrentPrice::where('id', $id)->exists()) {
             $currentprice = CurrentPrice::find($id);
             $currentprice->delete();
