@@ -24,8 +24,9 @@ class CompanyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Company $company)
     {
+        $this->authorize('create', Company::class);
         $data = $this->validateRequest();
 
         Company::create($data);
@@ -60,19 +61,20 @@ class CompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Company $company)
     {
+        $this->authorize('update', $company);
         $data = $this->validateRequest();
-        
-        if (Company::where('id', $id)->exists()) {
-            $name = $request->name;
-            $logo = $request->logo;
-            $description = $request->description;
-            $location = $request->location;
-            $country = $request->country;
-            $established = $request->established;
 
-            $company = Company::find($id);
+        if ($company) {
+            $name = $company->name;
+            $logo = $company->logo;
+            $description = $company->description;
+            $location = $company->location;
+            $country = $company->country;
+            $established = $company->established;
+
+            $company = Company::find($company->id);
             $company->name = is_null($name) ? $company->name : $name;
             $company->logo = is_null($logo) ? $company->logo : $logo;
             $company->description = is_null($description) ? $company->description : $description;
@@ -98,10 +100,11 @@ class CompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Company $company)
     {
-        if (Company::where('id', $id)->exists()) {
-            $company = Company::find($id);
+        $this->authorize('delete', $company);
+        if ($company) {
+            $company = Company::find($company->id);
             $company->delete();
             return response()->json([
                 "message" => "company deleted",
@@ -116,7 +119,7 @@ class CompanyController extends Controller
     public function validateRequest()
     {
         return request()->validate([
-            'logo'=> 'nullable|string',
+            'logo' => 'nullable|string',
             'name' => 'required|string',
             'description' => 'required|string',
             'location' => 'required|string',
