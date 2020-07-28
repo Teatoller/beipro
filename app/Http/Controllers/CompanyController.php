@@ -26,6 +26,7 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Company::class);
         $data = $this->validateRequest();
 
         Company::create($data);
@@ -60,17 +61,18 @@ class CompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Company $company, $id)
     {
+        $this->authorize('update', $company);
         $data = $this->validateRequest();
         
         if (Company::where('id', $id)->exists()) {
-            $name = $request->name;
-            $logo = $request->logo;
-            $description = $request->description;
-            $location = $request->location;
-            $country = $request->country;
-            $established = $request->established;
+            $name = $company->name;
+            $logo = $company->logo;
+            $description = $company->description;
+            $location = $company->location;
+            $country = $company->country;
+            $established = $company->established;
 
             $company = Company::find($id);
             $company->name = is_null($name) ? $company->name : $name;
@@ -98,8 +100,9 @@ class CompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Company $company, $id)
     {
+        $this->authorize('delete', $company);
         if (Company::where('id', $id)->exists()) {
             $company = Company::find($id);
             $company->delete();
