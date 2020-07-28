@@ -26,6 +26,7 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Admin::class);
         $data = $this->validateRequest();
 
         Admin::create($data);
@@ -60,17 +61,18 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Admin $admin, $id)
     {
+        $this->authorize('update', $admin);
         $data = $this->validateRequest();
 
         if (Admin::where('id', $id)->exists()) {
-            $company_id = $request->company_id;
-            $firstname = $request->firstname;
-            $lastname = $request->lastname;
-            $staff_id = $request->staff_id;
-            $email = $request->email;
-            $role = $request->role;
+            $company_id = $admin->company_id;
+            $firstname = $admin->firstname;
+            $lastname = $admin->lastname;
+            $staff_id = $admin->staff_id;
+            $email = $admin->email;
+            $role = $admin->role;
 
             $admin = Admin::find($id);
             $admin->company_id = is_null($company_id) ? $admin->company_id : $company_id;
@@ -99,8 +101,9 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Admin $admin, $id)
     {
+        $this->authorize('delete', $admin);
         if (Admin::where('id', $id)->exists()) {
             $admin = Admin::find($id);
             $admin->delete();
