@@ -23,7 +23,6 @@ Route::group([
 });
 
 Route::group([
-    'prefix' => 'auth',
 ], function () {
     Route::post('login', 'AuthController@login');
     Route::post('register', 'AuthController@register');
@@ -49,6 +48,7 @@ Route::group([
         Route::get('combineadmins', 'CombineCompanyAdminController@index');
         Route::get('audits', 'AuditController@index');
         Route::get('audits/{token}', 'AuditController@show');
+        Route::get('roles', 'RoleController@index');
 
         Route::get('contact-us', 'ContactUsController@index');
         Route::post('contact-us', 'ContactUsController@store');

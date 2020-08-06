@@ -2,23 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
+use App\Admin;
+use Illuminate\Support\Facades\Auth;
 
 class CombineCompanyAdminController extends Controller
 {
     /**
-     * Display a listing of the front office admin and emails.
+     * Display logged in admin credentials
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $combineadmins = DB::table('companies')
-            ->join('admins', 'admins.company_id', '=', 'companies.id')
-            ->select('companies.name', 'companies.country', 'admins.id', 'admins.email', 'admins.role')
-            ->get();
+        $user = Auth::user();
 
-        return response($combineadmins, 200);
+        $admin = Admin::where('email', $user->email)->get();
+        return response($admin[0], 200);
     }
-
 }
