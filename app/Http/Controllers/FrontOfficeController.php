@@ -2,11 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Admin;
 use App\FrontOffice;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FrontOfficeController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function adminIndex()
+    {
+        $user = Auth::user();
+        $admins = Admin::where('email', $user->email)->get();
+        $companyId = $admins[0]['company_id'];
+        $frontOffices = FrontOffice::where('company_id', $companyId)->get();
+        return response($frontOffices, 200);
+    }
+
     /**
      * Display a listing of the resource.
      *
