@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Admin;
 use App\CompanyAdmin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CompanyAdminController extends Controller
 {
@@ -14,7 +16,10 @@ class CompanyAdminController extends Controller
      */
     public function index()
     {
-        $companyadmins = CompanyAdmin::all();
+        $user = Auth::user();
+        $admins = Admin::where('email', $user->email)->get();
+        $adminId = $admins[0]['id'];
+        $companyadmins = CompanyAdmin::where('admin_id', $adminId)->get();
         return response($companyadmins, 200);
     }
 
