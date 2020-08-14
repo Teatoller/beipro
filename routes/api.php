@@ -29,7 +29,7 @@ Route::group([
     Route::get('register/activate/{token}', 'AuthController@registerActivate');
 
     Route::group([
-        'middleware' => 'auth:api',
+        // 'middleware' => 'auth:api',
     ], function () {
         Route::get('logout', 'AuthController@logout');
         Route::get('profile', 'AuthController@profile');
@@ -49,6 +49,7 @@ Route::group([
         Route::get('audits', 'AuditController@index');
         Route::get('audits/{token}', 'AuditController@show');
         Route::get('roles', 'RoleController@index');
+        Route::get('frontshores', 'FrontOfficeController@adminIndex',);
 
         Route::get('contact-us', 'ContactUsController@index');
         Route::post('contact-us', 'ContactUsController@store');
