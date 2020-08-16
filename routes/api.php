@@ -29,7 +29,7 @@ Route::group([
     Route::get('register/activate/{token}', 'AuthController@registerActivate');
 
     Route::group([
-        // 'middleware' => 'auth:api',
+        'middleware' => 'auth:api',
     ], function () {
         Route::get('logout', 'AuthController@logout');
         Route::get('profile', 'AuthController@profile');
