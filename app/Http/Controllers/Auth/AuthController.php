@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Notifications\RegisterActivate;
 use Carbon\Carbon;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -12,6 +14,22 @@ use JD\Cloudder\Facades\Cloudder;
 
 class AuthController extends Controller
 {
+    use ThrottlesLogins, AuthenticatesUsers;
+
+    /**
+     * Attempts per cycle
+     *
+     * @var int
+     */
+    protected $maxAttempts = 3;
+
+    /**
+     * Decay minutes for throttling
+     *
+     * @var int
+     */
+    protected $decayMinutes = 5;
+
     /**
      * Register a new user.
      *@param  \Illuminate\Http\Request  $request
@@ -75,30 +93,47 @@ class AuthController extends Controller
             'password' => 'required|string',
             'remember_me' => 'boolean',
         ]);
+
+        if ($this->hasTooManyLoginAttempts($request)) {
+            $this->fireLockoutEvent($request);
+            return $this->sendLockoutResponse($request);
+        }
+
         $loginData = request(['email', 'password']);
         $loginData['active'] = 1;
         $loginData['deleted_at'] = null;
-        if (!Auth::attempt($loginData)) {
+
+        if (Auth::attempt($loginData)) {
+            $this->clearLoginAttempts($request);
+            $user = $request->user();
+            $tokenResult = $user->createToken('Personal Access Token');
+            $token = $tokenResult->token;
+            if ($request->remember_me) {
+                $token->expires_at = Carbon::now()->addWeeks(1);
+            }
+
+            $token->save();
             return response()->json([
-                'message' => "Unauthorized. First time login? Activate account from  your inbox before continuing. Else check that the email and password are correct",
-            ], 401);
+                'email' => $user->email,
+                'access_token' => $tokenResult->accessToken,
+                'token_type' => 'Bearer',
+                'expires_at' => Carbon::parse($tokenResult->token->expires_at)->toDateTimeString(),
+                'message' => 'You have logged in succesfully',
+            ]);
+        } else {
+            $this->incrementLoginAttempts($request);
+            if ($loginData['active'] == !1) {
+                return response()->json([
+                    'message' => "Unauthorized, Activate account from  your inbox before continuing.",
+                ], 401);
+            } else {
+                return response()->json([
+                    'message' => "Unauthorized.Check that the email and password are correct",
+                ], 401);
+            }
+
         }
 
-        $user = $request->user();
-        $tokenResult = $user->createToken('Personal Access Token');
-        $token = $tokenResult->token;
-        if ($request->remember_me) {
-            $token->expires_at = Carbon::now()->addWeeks(1);
-        }
-
-        $token->save();
-        return response()->json([
-            'email' => $user->email,
-            'access_token' => $tokenResult->accessToken,
-            'token_type' => 'Bearer',
-            'expires_at' => Carbon::parse($tokenResult->token->expires_at)->toDateTimeString(),
-            'message' => 'You have logged in succesfully',
-        ]);
     }
 
     /**
