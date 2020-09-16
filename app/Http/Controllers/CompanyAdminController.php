@@ -16,10 +16,21 @@ class CompanyAdminController extends Controller
      */
     public function index()
     {
+        $companyadmins = CompanyAdmin::all();
+        return response($companyadmins, 200);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function cofadmins()
+    {
         $user = Auth::user();
         $admins = Admin::where('email', $user->email)->get();
-        $adminId = $admins[0]['id'];
-        $companyadmins = CompanyAdmin::where('admin_id', $adminId)->get();
+        $companyId = $admins[0]['company_id'];
+        $companyadmins = CompanyAdmin::where('company_id', $companyId)->get();
         return response($companyadmins, 200);
     }
 
@@ -73,6 +84,7 @@ class CompanyAdminController extends Controller
 
         if (CompanyAdmin::where('id', $id)->exists()) {
             $admin_id = $companyAdmin->admin_id;
+            $company_id = $companyAdmin->company_id;
             $front_office_id = $companyAdmin->front_office_id;
             $firstname = $companyAdmin->firstname;
             $lastname = $companyAdmin->lastname;
@@ -83,6 +95,7 @@ class CompanyAdminController extends Controller
 
             $companyadmin = CompanyAdmin::find($id);
             $companyadmin->admin_id = is_null($admin_id) ? $companyadmin->admin_id : $admin_id;
+            $companyadmin->company_id = is_null($company_id) ? $companyadmin->company_id : $company_id;
             $companyadmin->front_office_id = is_null($front_office_id) ? $companyadmin->front_office_id : $front_office_id;
             $companyadmin->firstname = is_null($firstname) ? $companyadmin->firstname : $firstname;
             $companyadmin->lastname = is_null($lastname) ? $companyadmin->lastname : $lastname;
@@ -131,6 +144,7 @@ class CompanyAdminController extends Controller
     {
         return request()->validate([
             'admin_id' => 'required|numeric',
+            'company_id' => 'required|numeric',
             'front_office_id' => 'required|numeric',
             'firstname' => 'required|alpha|string',
             'lastname' => 'required|alpha|string',
