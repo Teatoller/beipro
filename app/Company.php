@@ -35,11 +35,19 @@ class Company extends Model implements Auditable
     }
 
     /**
-     * Get the company Admins for the company.
+     * Get the Admins for the company.
      */
     public function admins()
     {
         return $this->hasMany('App\Admin');
+    }
+
+    /**
+     * Get the company Admins for the company.
+     */
+    public function companyAdmins()
+    {
+        return $this->hasMany('App\CompanyAdmin');
     }
 
     /**

@@ -50,6 +50,7 @@ Route::group([
         Route::get('audits/{token}', 'AuditController@show');
         Route::get('roles', 'RoleController@index');
         Route::get('frontshores', 'FrontOfficeController@adminIndex',);
+        Route::get('cofadmins', 'CompanyAdminController@cofadmins',);
 
         Route::get('contact-us', 'ContactUsController@index');
         Route::post('contact-us', 'ContactUsController@store');
