@@ -11,6 +11,7 @@ class CompanyAdmin extends Model implements Auditable
 
     protected $fillable = [
         'admin_id',
+        'company_id',
         'front_office_id',
         'firstname',
         'lastname',
